@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:verum_flutter/resources/auth_methods.dart';
+import 'package:verum_flutter/screens/signup_screen.dart';
 import 'package:verum_flutter/utils/colors.dart';
 import 'package:verum_flutter/utils/utils.dart';
 import 'package:verum_flutter/widgets/text_field_input.dart';
@@ -37,6 +38,14 @@ class _LoginScreenState extends State<LoginScreen> {
     setState(() {
       _isLoading = true;
     });
+  }
+
+  void navigateToSignup() {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => const SignupScreen(),
+      ),
+    );
   }
 
   @override
@@ -112,7 +121,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                   GestureDetector(
-                    onTap: () {},
+                    onTap: navigateToSignup,
                     child: Container(
                       child: Text(
                         "Sign up.",
