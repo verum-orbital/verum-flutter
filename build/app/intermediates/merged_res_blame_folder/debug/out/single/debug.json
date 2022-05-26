@@ -8,12 +8,12 @@
         "source": "/Users/winston/verum-flutter/android/app/src/main/res/mipmap-hdpi/ic_launcher.png"
     },
     {
-        "merged": "/Users/winston/verum-flutter/build/app/intermediates/merged_res/debug/mipmap-xxxhdpi_ic_launcher.png.flat",
-        "source": "/Users/winston/verum-flutter/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png"
-    },
-    {
         "merged": "/Users/winston/verum-flutter/build/app/intermediates/merged_res/debug/mipmap-mdpi_ic_launcher.png.flat",
         "source": "/Users/winston/verum-flutter/android/app/src/main/res/mipmap-mdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/Users/winston/verum-flutter/build/app/intermediates/merged_res/debug/mipmap-xxxhdpi_ic_launcher.png.flat",
+        "source": "/Users/winston/verum-flutter/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png"
     },
     {
         "merged": "/Users/winston/verum-flutter/build/app/intermediates/merged_res/debug/mipmap-xxhdpi_ic_launcher.png.flat",
