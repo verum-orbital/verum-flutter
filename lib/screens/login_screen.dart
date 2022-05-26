@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:verum_flutter/resources/auth_methods.dart';
+import 'package:verum_flutter/responsive/mobile_screen_layout.dart';
+import 'package:verum_flutter/responsive/responsive_layout_screen.dart';
+import 'package:verum_flutter/responsive/web_screen_layout.dart';
 import 'package:verum_flutter/screens/signup_screen.dart';
 import 'package:verum_flutter/utils/colors.dart';
 import 'package:verum_flutter/utils/utils.dart';
@@ -32,6 +35,14 @@ class _LoginScreenState extends State<LoginScreen> {
     String res = await AuthMethods().loginUser(
         email: _emailController.text, password: _passwordController.text);
     if (res == "success") {
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(
+          builder: (context) => const ResponsiveLayout(
+            webScreenLayout: WebScreenLayout(),
+            mobileScreenLayout: MobileScreenLayout(),
+          ),
+        ),
+      );
     } else {
       showSnackBar(res, context);
     }
