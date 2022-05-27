@@ -1,23 +1,27 @@
 import 'dart:typed_data';
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 
 class StorageMethods {
-  final FirebaseStorage _storage = FirebaseStorage.instance;
-  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseStorage storage = FirebaseStorage.instance;
+  final FirebaseAuth auth = FirebaseAuth.instance;
 
-  //adding image to firebase storage
-  Future<String> uploadImageToStorage(
-      String childName, Uint8List file, bool isPost) async {
+  // Upload an image to firestore and returns its download URL
+  Future<String> uploadImage(
+      String folderName, Uint8List image, bool isUserPost) async {
+    // Uploads the given image to /folderName/<currentUserUID>
     Reference ref =
-        _storage.ref().child(childName).child(_auth.currentUser!.uid);
+        storage.ref().child(folderName).child(auth.currentUser!.uid);
 
-    UploadTask uploadTask = ref.putData(file);
+    UploadTask uploadTask = ref.putData(image);
 
-    TaskSnapshot snap = await uploadTask;
-    String downloadUrl = await snap.ref.getDownloadURL();
-    return downloadUrl;
+    TaskSnapshot snapshot = await uploadTask;
+
+    print('Uploaded image to path: ' + ref.fullPath);
+
+    return snapshot.ref.getDownloadURL();
   }
 }
