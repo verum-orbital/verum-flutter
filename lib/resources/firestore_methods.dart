@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:verum_flutter/models/user.dart' as userModel;
 import 'package:verum_flutter/models/post.dart' as model;
 import 'package:verum_flutter/resources/storage_methods.dart';
 
@@ -30,5 +31,12 @@ class FirestoreMethods {
     } catch (err) {
       return err.toString();
     }
+  }
+
+  Future<userModel.User> fetchUser(String uid) {
+    return _firestore.collection('users').doc(uid).get().then((value) {
+      print(value.data());
+      return userModel.User.fromJson(value.data()!);
+    });
   }
 }

@@ -19,10 +19,21 @@ class PostCard extends StatefulWidget {
 
 class _PostCardState extends State<PostCard> {
   userModel.User _user = userModel.User(
-      email: '',
-      username: 'Testing',
-      bio: '',
-      avatarURL: placeholderAvatarImageURL);
+      email: '', username: '', bio: '', avatarURL: placeholderAvatarImageURL);
+
+  @override
+  void initState() {
+    super.initState();
+    getUser();
+  }
+
+  void getUser() async {
+    var user = await FirestoreMethods().fetchUser(widget.post.uid);
+    print(user);
+    setState(() {
+      _user = user;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
