@@ -14,8 +14,9 @@ class AddPostScreen extends StatefulWidget {
 }
 
 class _AddPostScreenState extends State<AddPostScreen> {
+  final TextEditingController _captionController = TextEditingController();
   Uint8List? _image;
-  bool _isUploading = true;
+  bool _isUploading = false;
 
   void clearImage() {
     setState(() {
@@ -106,6 +107,12 @@ class _AddPostScreenState extends State<AddPostScreen> {
                               alignment: FractionalOffset.topCenter)),
                     ),
                   ),
+                ),
+                TextField(
+                  controller: _captionController,
+                  decoration: const InputDecoration(
+                      hintText: 'Caption...', border: InputBorder.none),
+                  maxLines: 8,
                 ),
               ],
             ));
