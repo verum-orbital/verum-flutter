@@ -89,6 +89,7 @@ Our proof-of-concept is built using Flutter and Firebase
 ![FeedScreen](https://user-images.githubusercontent.com/81674501/170652668-17a20a41-a98d-4fd5-8968-bde2459f4491.png)
 
 
+### App Bundle Distribution
 
-
+If you have an android device, you may test our app yourself by installing the apk file [here](https://drive.google.com/file/d/1k8aEa3_fC8D00PhxEAMB7NmOn59QZNE5/view?usp=sharing)
 
