@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="default_web_client_id" translatable="false">132209873388-dqmltlh4kb72dmfo13p0sgrs97cjt0du.apps.googleusercontent.com</string>
+    <string name="gcm_defaultSenderId" translatable="false">132209873388</string>
+    <string name="google_api_key" translatable="false">AIzaSyBNTFzL4iqGV7Vn_3UFgZvb40Oom5s1x2Y</string>
+    <string name="google_app_id" translatable="false">1:132209873388:android:e0770238b96015bb59b0c9</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyBNTFzL4iqGV7Vn_3UFgZvb40Oom5s1x2Y</string>
+    <string name="google_storage_bucket" translatable="false">verum-4bd2b.appspot.com</string>
+    <string name="project_id" translatable="false">verum-4bd2b</string>
+</resources>
