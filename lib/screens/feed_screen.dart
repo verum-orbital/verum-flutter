@@ -26,7 +26,8 @@ class _FeedScreenState extends State<FeedScreen> {
   }
 
   void getPosts() async {
-    Iterable<String> userFollows = [FirebaseAuth.instance.currentUser!.uid];
+    Iterable<String> userFollows =
+        await FirestoreMethods().fetchUserFollowing();
 
     List<Post> res = <Post>[];
     userFollows.forEach((uid) {

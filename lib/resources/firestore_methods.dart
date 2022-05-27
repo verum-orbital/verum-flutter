@@ -39,4 +39,14 @@ class FirestoreMethods {
       return userModel.User.fromJson(value.data()!);
     });
   }
+
+  Future<Iterable<String>> fetchUserFollowing() {
+    // gets the ids of all users that the current user is following
+    return _firestore
+        .collection("follows")
+        .doc(_auth.currentUser!.uid)
+        .collection("userFollows")
+        .get()
+        .then((value) => value.docs.map((e) => e.id));
+  }
 }
