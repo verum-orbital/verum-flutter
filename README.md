@@ -1,6 +1,6 @@
-# Milestone 1 Submission
+# Verum (Milestone 1)
 
-## Team Name: Verum
+## Team ID: 5302
 ## Proposed Level of Achievement: Apollo
 
 ## Motivation 
@@ -80,10 +80,13 @@ Our proof-of-concept is built using Flutter and Firebase
 
 ### Add Post Screen
 
+![CreatePostScreen](https://user-images.githubusercontent.com/81674501/170652644-e258c3ea-53ce-4a08-a055-1e74888c0067.png)
+![CreatePostButton](https://user-images.githubusercontent.com/81674501/170652659-7df69372-f8d8-4730-9d67-9872c4967368.png)
 
 
 ### User Feed Screen
 
+![FeedScreen](https://user-images.githubusercontent.com/81674501/170652668-17a20a41-a98d-4fd5-8968-bde2459f4491.png)
 
 
 
