@@ -6,6 +6,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:verum_flutter/resources/auth_methods.dart';
 import 'package:verum_flutter/screens/login_screen.dart';
 import 'package:verum_flutter/utils/colors.dart';
+import 'package:verum_flutter/utils/global_variables.dart';
 import 'package:verum_flutter/widgets/text_field_input.dart';
 
 import '../responsive/mobile_screen_layout.dart';
@@ -95,8 +96,7 @@ class _SignupScreenState extends State<SignupScreen> {
                     )
                   : const CircleAvatar(
                       radius: 64,
-                      backgroundImage: NetworkImage(
-                          'https://ucanr.edu/sites/4hfoundation/files/332696.jpg'),
+                      backgroundImage: NetworkImage(placeholderAvatarImageURL),
                     ),
               Positioned(
                   bottom: -10,
