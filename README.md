@@ -67,29 +67,24 @@ Chat/Messaging
 
 ### Login Screen
 
-![LoginScreen](https://user-images.githubusercontent.com/81674501/170652498-0f1c1299-0a27-46af-8dcb-e67cba875831.png)
+<img src="https://user-images.githubusercontent.com/81674501/170652498-0f1c1299-0a27-46af-8dcb-e67cba875831.png" width="200">
 
 
 ### Sign-up Screen
 
-![SignupScreen](https://user-images.githubusercontent.com/81674501/170652484-b5c498d4-1d02-4186-8ab6-0672fee73476.png)
-
+<img src="https://user-images.githubusercontent.com/81674501/170652484-b5c498d4-1d02-4186-8ab6-0672fee73476.png" width="200">
 
 ### Sign-out Button in Profile Screen
 
-![SignOutButton](https://user-images.githubusercontent.com/81674501/170652527-b48d56e1-a504-484c-895b-9889925de3e6.png)
-
+<img src="https://user-images.githubusercontent.com/81674501/170652527-b48d56e1-a504-484c-895b-9889925de3e6.png" width="200">
 
 ### Add Post Screen
-
-![CreatePostScreen](https://user-images.githubusercontent.com/81674501/170652644-e258c3ea-53ce-4a08-a055-1e74888c0067.png)
-![CreatePostButton](https://user-images.githubusercontent.com/81674501/170652659-7df69372-f8d8-4730-9d67-9872c4967368.png)
+<img src="https://user-images.githubusercontent.com/81674501/170652644-e258c3ea-53ce-4a08-a055-1e74888c0067.png" width="200">
+<img src="https://user-images.githubusercontent.com/81674501/170652659-7df69372-f8d8-4730-9d67-9872c4967368.png" width="200">
 
 
 ### User Feed Screen
-
-![FeedScreen](https://user-images.githubusercontent.com/81674501/170652668-17a20a41-a98d-4fd5-8968-bde2459f4491.png)
-
+<img src="https://user-images.githubusercontent.com/81674501/170652668-17a20a41-a98d-4fd5-8968-bde2459f4491.png" width="200">
 
 ### App Bundle Distribution
 
