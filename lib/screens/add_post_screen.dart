@@ -2,6 +2,7 @@ import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:verum_flutter/resources/firestore_methods.dart';
 import 'package:verum_flutter/utils/utils.dart';
 
 import '../utils/colors.dart';
@@ -63,6 +64,26 @@ class _AddPostScreenState extends State<AddPostScreen> {
         });
   }
 
+  Future<void> uploadImage() async {
+    if (_image != null) {
+      setState(() {
+        _isUploading = true;
+      });
+
+      await FirestoreMethods()
+          .createPost(caption: _captionController.text, image: _image!);
+
+      setState(() {
+        _isUploading = false;
+      });
+
+      showSnackBar('Post uploaded successfully!', context);
+      clearImage();
+    } else {
+      showSnackBar("Please select an image to upload", context);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return _image == null
@@ -81,7 +102,7 @@ class _AddPostScreenState extends State<AddPostScreen> {
                 centerTitle: false,
                 actions: [
                   TextButton(
-                      onPressed: () {},
+                      onPressed: uploadImage,
                       child: const Text('Post',
                           style: TextStyle(
                               color: Colors.blueAccent,
