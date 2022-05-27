@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:verum_flutter/models/user.dart';
 import 'package:verum_flutter/screens/add_post_screen.dart';
+import 'package:verum_flutter/screens/feed_screen.dart';
 
 const webScreenWidth = 600;
 const placeholderAvatarImageURL =
@@ -8,7 +9,7 @@ const placeholderAvatarImageURL =
 const placeholderUser = User(
     email: '', username: '', bio: '', avatarURL: placeholderAvatarImageURL);
 const homeScreenWidgets = [
-  Text('Feed'),
+  FeedScreen(),
   Text('Search'),
   AddPostScreen(),
   Text('Notifications'),

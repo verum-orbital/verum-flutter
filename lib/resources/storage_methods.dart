@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:uuid/uuid.dart';
 
 class StorageMethods {
   final FirebaseStorage storage = FirebaseStorage.instance;
@@ -15,6 +16,11 @@ class StorageMethods {
     // Uploads the given image to /folderName/<currentUserUID>
     Reference ref =
         storage.ref().child(folderName).child(auth.currentUser!.uid);
+
+    if (isUserPost) {
+      String id = const Uuid().v1();
+      ref = ref.child(id);
+    }
 
     UploadTask uploadTask = ref.putData(image);
 
