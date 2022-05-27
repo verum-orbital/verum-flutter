@@ -15,6 +15,7 @@ class AddPostScreen extends StatefulWidget {
 
 class _AddPostScreenState extends State<AddPostScreen> {
   Uint8List? _image;
+  bool _isUploading = true;
 
   void clearImage() {
     setState(() {
@@ -86,13 +87,27 @@ class _AddPostScreenState extends State<AddPostScreen> {
                               fontWeight: FontWeight.bold,
                               fontSize: 16)))
                 ]),
-            body: SizedBox(
-                child: Container(
-              decoration: BoxDecoration(
-                  image: DecorationImage(
-                      image: MemoryImage(_image!),
-                      fit: BoxFit.fitWidth,
-                      alignment: FractionalOffset.topCenter)),
-            )));
+            body: Column(
+              children: [
+                _isUploading
+                    ? const LinearProgressIndicator()
+                    : const Padding(padding: EdgeInsets.only(top: 0)),
+                const Divider(),
+                SizedBox(
+                  height: 45,
+                  width: 45,
+                  child: AspectRatio(
+                    aspectRatio: 487 / 451,
+                    child: Container(
+                      decoration: BoxDecoration(
+                          image: DecorationImage(
+                              image: MemoryImage(_image!),
+                              fit: BoxFit.fill,
+                              alignment: FractionalOffset.topCenter)),
+                    ),
+                  ),
+                ),
+              ],
+            ));
   }
 }
