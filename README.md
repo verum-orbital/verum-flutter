@@ -63,6 +63,26 @@ Chat/Messaging
 Current Progress
 Our proof-of-concept is built using Flutter and Firebase
 
+### Login Screen
+
+![LoginScreen](https://user-images.githubusercontent.com/81674501/170652498-0f1c1299-0a27-46af-8dcb-e67cba875831.png)
+
+
+### Sign-up Screen
+
+![SignupScreen](https://user-images.githubusercontent.com/81674501/170652484-b5c498d4-1d02-4186-8ab6-0672fee73476.png)
+
+
+### Sign-out Button in Profile Screen
+
+![SignOutButton](https://user-images.githubusercontent.com/81674501/170652527-b48d56e1-a504-484c-895b-9889925de3e6.png)
+
+
+### Add Post Screen
+
+
+
+### User Feed Screen
 
 
 
