@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:verum_flutter/providers/user_provider.dart';
-import 'package:verum_flutter/utils/dimensions.dart';
+import 'package:verum_flutter/utils/global_variables.dart';
 
 class ResponsiveLayout extends StatefulWidget {
   final Widget webScreenLayout;
@@ -33,7 +33,7 @@ class _ResponsiveLayoutState extends State<ResponsiveLayout> {
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(builder: (context, constraints) {
-      if (constraints.maxWidth > webScreenSize) {
+      if (constraints.maxWidth > webScreenWidth) {
         //web screen
         return widget.webScreenLayout;
       }

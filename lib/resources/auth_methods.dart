@@ -1,25 +1,22 @@
 import 'dart:typed_data';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 import 'package:verum_flutter/models/user.dart' as model;
 import 'package:verum_flutter/resources/storage_methods.dart';
 
 class AuthMethods {
-  final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
 
   Future<model.User> getUserDetails() async {
     User currentUser = _auth.currentUser!;
 
-    DocumentSnapshot snap =
+    DocumentSnapshot snapshot =
         await _firestore.collection('users').doc(currentUser.uid).get();
 
-    return model.User.fromSnap(snap);
+    return model.User.fromSnapshot(snapshot);
   }
 
-  // sign up user
   Future<String> signUpUser({
     required String email,
     required String password,
@@ -27,38 +24,50 @@ class AuthMethods {
     required String bio,
     required Uint8List file,
   }) async {
-    String res = "Some error occured";
+    String res = "Some error Occurred";
     try {
       if (email.isNotEmpty ||
           password.isNotEmpty ||
           username.isNotEmpty ||
           bio.isNotEmpty ||
           file != null) {
-        // register user
+        // registering user in auth with email and password
         UserCredential cred = await _auth.createUserWithEmailAndPassword(
-            email: email, password: password);
-        String photoUrl = await StorageMethods()
-            .uploadImageToStorage('profilePics', file, false);
-        // add user to our database
-
-        model.User user = model.User(
-          username: username,
-          uid: cred.user!.uid,
           email: email,
-          bio: bio,
-          followers: [],
-          following: [],
-          photoUrl: photoUrl,
+          password: password,
         );
 
-        await _firestore.collection('users').doc(cred.user!.uid).set(
-              user.toJson(),
-            );
+        String userAvatarDownloadURL =
+            await StorageMethods().uploadImage('userAvatars', file, false);
+
+        // adding user in our database
+        model.User user = model.User(
+            username: username,
+            email: email,
+            avatarURL: userAvatarDownloadURL,
+            bio: bio);
+
+        await _firestore
+            .collection("users")
+            .doc(cred.user!.uid)
+            .set(user.toJson());
 
         res = "success";
+        print('successfully registered user: ${cred.user?.uid}');
+      } else {
+        res = "Please enter all the fields";
+      }
+    } on FirebaseAuthException catch (err) {
+      switch (err.code) {
+        case 'invalid-email':
+          return 'The email is badly formatted';
+        case 'weak-password':
+          return 'The password should be at least 6 characters';
+        default:
+          return err.toString();
       }
     } catch (err) {
-      res = err.toString();
+      return err.toString();
     }
     return res;
   }
@@ -68,18 +77,34 @@ class AuthMethods {
     required String email,
     required String password,
   }) async {
-    String res = "Some error";
     try {
-      if (email.isNotEmpty || password.isNotEmpty) {
+      if (email.isNotEmpty && password.isNotEmpty) {
+        // logging in user with email and password
         await _auth.signInWithEmailAndPassword(
-            email: email, password: password);
-        res = "success";
+          email: email,
+          password: password,
+        );
+        return "success";
       } else {
-        res = "Please enter all the fields";
+        return "Please enter all the fields";
+      }
+    } on FirebaseAuthException catch (err) {
+      switch (err.code) {
+        case 'invalid-email':
+          return 'The email is badly formatted';
+        case 'user-not-found':
+          return 'There is no user corresponding to this identifier.';
+        case 'wrong-password':
+          return 'The password is invalid or the user does not have a password';
+        default:
+          return err.toString();
       }
     } catch (err) {
-      res = err.toString();
+      return err.toString();
     }
-    return res;
+  }
+
+  Future<void> signOut() async {
+    await _auth.signOut();
   }
 }
