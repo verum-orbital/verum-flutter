@@ -39,6 +39,8 @@ Users will be able to get a snapshot of their favourite celebrity and role model
 
 ### Web App & Mobile App
 
+We intend to use Flutter and Firebase to develop Verum.
+
 #### Features to be completed by the mid of June: 
 
 User Authentication
@@ -60,8 +62,8 @@ Likes System
 Comment system
 Chat/Messaging
 
-Current Progress
-Our proof-of-concept is built using Flutter and Firebase
+## Current Progress
+
 
 ### Login Screen
 
