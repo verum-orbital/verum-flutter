@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:verum_flutter/utils/utils.dart';
 
+import '../utils/colors.dart';
+
 class AddPostScreen extends StatefulWidget {
   const AddPostScreen({Key? key}) : super(key: key);
 
@@ -13,6 +15,12 @@ class AddPostScreen extends StatefulWidget {
 
 class _AddPostScreenState extends State<AddPostScreen> {
   Uint8List? _image;
+
+  void clearImage() {
+    setState(() {
+      _image = null;
+    });
+  }
 
   _selectImage(BuildContext context) async {
     return showDialog(
@@ -62,13 +70,29 @@ class _AddPostScreenState extends State<AddPostScreen> {
               onPressed: () => _selectImage(context),
             ),
           )
-        : SizedBox(
-            child: Container(
-            decoration: BoxDecoration(
-                image: DecorationImage(
-                    image: MemoryImage(_image!),
-                    fit: BoxFit.fitWidth,
-                    alignment: FractionalOffset.topCenter)),
-          ));
+        : Scaffold(
+            appBar: AppBar(
+                backgroundColor: mobileBackgroundColor,
+                leading: IconButton(
+                    icon: const Icon(Icons.arrow_back), onPressed: clearImage),
+                title: const Text('Create Post'),
+                centerTitle: false,
+                actions: [
+                  TextButton(
+                      onPressed: () {},
+                      child: const Text('Post',
+                          style: TextStyle(
+                              color: Colors.blueAccent,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16)))
+                ]),
+            body: SizedBox(
+                child: Container(
+              decoration: BoxDecoration(
+                  image: DecorationImage(
+                      image: MemoryImage(_image!),
+                      fit: BoxFit.fitWidth,
+                      alignment: FractionalOffset.topCenter)),
+            )));
   }
 }
