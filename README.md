@@ -93,11 +93,11 @@ Chat/Messaging
 
 ### Add Post Screen
 
-<img src="https://user-images.githubusercontent.com/81674501/170652644-e258c3ea-53ce-4a08-a055-1e74888c0067.png" width="200">
+<img src="https://user-images.githubusercontent.com/81674501/170652659-7df69372-f8d8-4730-9d67-9872c4967368.png" width="200">
 
 - Clicking the upload button brings up a dialog that can take the user to his/her device's image gallery or camera.
 
-<img src="https://user-images.githubusercontent.com/81674501/170652659-7df69372-f8d8-4730-9d67-9872c4967368.png" width="200">
+<img src="https://user-images.githubusercontent.com/81674501/170652644-e258c3ea-53ce-4a08-a055-1e74888c0067.png" width="200">
 
 - Users are able to create a post with a caption using an image from their device's gallery or camera
 
