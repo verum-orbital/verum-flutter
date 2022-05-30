@@ -64,7 +64,7 @@ Chat/Messaging
 
 ## Current Progress
 
-### User Flow / Deisgn Diagram
+### User Flow / Design Diagram
 
 <img width="878" alt="Verum User Flow" src="https://user-images.githubusercontent.com/81674501/170904715-dbef8206-d351-4bb3-a15a-c4788d1fcf18.png">
 
