@@ -64,6 +64,14 @@ Chat/Messaging
 
 ## Current Progress
 
+### User Flow / Deisgn Diagram
+
+<img width="878" alt="Verum User Flow" src="https://user-images.githubusercontent.com/81674501/170904715-dbef8206-d351-4bb3-a15a-c4788d1fcf18.png">
+
+### Firestore Database Schema
+
+<img width="1012" alt="Firestore DB Schema" src="https://user-images.githubusercontent.com/81674501/170904865-4d01a76e-37d2-4b43-89cd-76086d59ae5c.png">
+
 
 ### Login Screen
 
