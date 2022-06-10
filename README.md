@@ -43,24 +43,24 @@ We intend to use Flutter and Firebase to develop Verum.
 
 #### Features to be completed by the mid of June: 
 
-User Authentication
-User Profile
-Upload posts
-View post history
-Post timing restrictions
-Push notifications
-Relationship system (e.g. Follow & Unfollow, Friend & Unfriend, etc)
-View other users’ posts
+- User Authentication
+- User Profile
+- Upload posts
+- View post history
+- Post timing restrictions
+- Push notifications
+- Relationship system (e.g. Follow & Unfollow, Friend & Unfriend, etc)
+- View other users’ posts
 
 
 #### Features to be completed by the mid of July: 
-Gamification/Points system 
-Incentivise users to post regularly & abide by timing constraints
-Allow users to earn “reputation/credibility” that shows how unfiltered their posts are (to what extent they abide by the spirit of the platform) 
-Privacy Settings (private or public account)
-Likes System
-Comment system
-Chat/Messaging
+- Gamification/Points system 
+- Incentivise users to post regularly & abide by timing constraints
+- Allow users to earn “reputation/credibility” that shows how unfiltered their posts are (to what extent they abide by the spirit of the platform) 
+- Privacy Settings (private or public account)
+- Likes System
+- Comment system
+- Chat/Messaging
 
 ## Current Progress
 
