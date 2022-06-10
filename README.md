@@ -43,9 +43,9 @@ We intend to use Flutter and Firebase to develop Verum.
 
 #### Features to be completed by the mid of June: 
 
-- User Authentication
-- User Profile
-- Upload posts
+- User Authentication ✅  
+- User Profile ✅
+- Upload posts ✅
 - View post history
 - Post timing restrictions
 - Push notifications
