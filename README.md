@@ -43,53 +43,71 @@ We intend to use Flutter and Firebase to develop Verum.
 
 #### Features to be completed by the mid of June: 
 
-User Authentication
-User Profile
-Upload posts
-View post history
-Post timing restrictions
-Push notifications
-Relationship system (e.g. Follow & Unfollow, Friend & Unfriend, etc)
-View other users’ posts
+- User Authentication ✅  
+- User Profile ✅
+- Upload posts ✅
+- View post history
+- Post timing restrictions
+- Push notifications
+- Relationship system (e.g. Follow & Unfollow, Friend & Unfriend, etc)
+- View other users’ posts
 
 
 #### Features to be completed by the mid of July: 
-Gamification/Points system 
-Incentivise users to post regularly & abide by timing constraints
-Allow users to earn “reputation/credibility” that shows how unfiltered their posts are (to what extent they abide by the spirit of the platform) 
-Privacy Settings (private or public account)
-Likes System
-Comment system
-Chat/Messaging
+- Gamification/Points system 
+- Incentivise users to post regularly & abide by timing constraints
+- Allow users to earn “reputation/credibility” that shows how unfiltered their posts are (to what extent they abide by the spirit of the platform) 
+- Privacy Settings (private or public account)
+- Likes System
+- Comment system
+- Chat/Messaging
 
 ## Current Progress
+
+### User Flow / Design Diagram
+
+<img width="878" alt="Verum User Flow" src="https://user-images.githubusercontent.com/81674501/170904715-dbef8206-d351-4bb3-a15a-c4788d1fcf18.png">
+
+### Firestore Database Schema
+
+<img width="1012" alt="Firestore DB Schema" src="https://user-images.githubusercontent.com/81674501/170904865-4d01a76e-37d2-4b43-89cd-76086d59ae5c.png">
 
 
 ### Login Screen
 
-![LoginScreen](https://user-images.githubusercontent.com/81674501/170652498-0f1c1299-0a27-46af-8dcb-e67cba875831.png)
+<img src="https://user-images.githubusercontent.com/81674501/170652498-0f1c1299-0a27-46af-8dcb-e67cba875831.png" width="200">
 
-
+- Users are able to login with their registered email and password
+- This is done via Firebase Authentication
+ 
 ### Sign-up Screen
 
-![SignupScreen](https://user-images.githubusercontent.com/81674501/170652484-b5c498d4-1d02-4186-8ab6-0672fee73476.png)
+<img src="https://user-images.githubusercontent.com/81674501/170652484-b5c498d4-1d02-4186-8ab6-0672fee73476.png" width="200">
 
+- Users are able to register with an email and password
+- This is done via Firebase Authentication
 
 ### Sign-out Button in Profile Screen
 
-![SignOutButton](https://user-images.githubusercontent.com/81674501/170652527-b48d56e1-a504-484c-895b-9889925de3e6.png)
-
+<img src="https://user-images.githubusercontent.com/81674501/170652527-b48d56e1-a504-484c-895b-9889925de3e6.png" width="200">
 
 ### Add Post Screen
 
-![CreatePostScreen](https://user-images.githubusercontent.com/81674501/170652644-e258c3ea-53ce-4a08-a055-1e74888c0067.png)
-![CreatePostButton](https://user-images.githubusercontent.com/81674501/170652659-7df69372-f8d8-4730-9d67-9872c4967368.png)
+<img src="https://user-images.githubusercontent.com/81674501/170652659-7df69372-f8d8-4730-9d67-9872c4967368.png" width="200">
 
+- Clicking the upload button brings up a dialog that can take the user to his/her device's image gallery or camera.
+
+<img src="https://user-images.githubusercontent.com/81674501/170652644-e258c3ea-53ce-4a08-a055-1e74888c0067.png" width="200">
+
+- Users are able to create a post with a caption using an image from their device's gallery or camera
 
 ### User Feed Screen
 
-![FeedScreen](https://user-images.githubusercontent.com/81674501/170652668-17a20a41-a98d-4fd5-8968-bde2459f4491.png)
+<img src="https://user-images.githubusercontent.com/81674501/170652668-17a20a41-a98d-4fd5-8968-bde2459f4491.png" width="200">
 
+- Users are able to view posts from followed users.  
+- Note: The follow/unfollow system is currently not implemented in the app. This was achieved by manually adding documents to the Firestore Database.
+- Note: The likes and comments system is currently not implemented in the app. Placeholders were used instead.
 
 ### App Bundle Distribution
 
