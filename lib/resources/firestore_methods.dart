@@ -49,4 +49,12 @@ class FirestoreMethods {
         .get()
         .then((value) => value.docs.map((e) => e.id));
   }
+
+  Future<Iterable<String>> fetchAllUsers() {
+    // gets the ids of all users that the current user is following
+    return _firestore
+        .collection("users")
+        .get()
+        .then((value) => value.docs.map((e) => e.id));
+  }
 }
