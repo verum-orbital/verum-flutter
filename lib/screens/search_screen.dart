@@ -4,6 +4,9 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:verum_flutter/utils/colors.dart';
 import 'package:verum_flutter/utils/global_variables.dart';
 
+import '../models/user.dart';
+import '../resources/firestore_methods.dart';
+
 class SearchScreen extends StatefulWidget {
   const SearchScreen({Key? key}) : super(key: key);
 
@@ -14,6 +17,24 @@ class SearchScreen extends StatefulWidget {
 class _SearchScreenState extends State<SearchScreen> {
   final TextEditingController searchController = TextEditingController();
   bool isShowUsers = false;
+
+  List<String> _userFollows = List.empty();
+
+  @override
+  void initState() {
+    super.initState();
+    _getFollows();
+  }
+
+  void _getFollows() async {
+    Iterable<String> userFollows =
+        await FirestoreMethods().fetchUserFollowing();
+    List<String> res = [];
+    res.addAll(userFollows);
+    setState(() {
+      _userFollows = res;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +50,6 @@ class _SearchScreenState extends State<SearchScreen> {
               setState(() {
                 isShowUsers = true;
               });
-              print(_);
             },
           ),
         ),
@@ -54,6 +74,7 @@ class _SearchScreenState extends State<SearchScreen> {
                 return ListView.builder(
                   itemCount: snapshotData.docs.length,
                   itemBuilder: (context, index) {
+                    final uid = snapshotData.docs[index].id;
                     final doc =
                         snapshotData.docs[index].data() as Map<String, dynamic>;
                     return ListTile(
@@ -62,6 +83,17 @@ class _SearchScreenState extends State<SearchScreen> {
                           doc.containsKey('avatarURL') ? doc['avatarURL'] : '',
                         ),
                         radius: 16,
+                      ),
+                      trailing: TextButton(
+                        child: Text(
+                            _userFollows.contains(uid) ? 'Unfollow' : 'Follow'),
+                        onPressed: () => _userFollows.contains(uid)
+                            ? FirestoreMethods()
+                                .unfollowUser(uid)
+                                .then((_) => _getFollows())
+                            : FirestoreMethods()
+                                .followUser(uid)
+                                .then((_) => _getFollows()),
                       ),
                       title: Text(
                         doc.containsKey('username') ? doc['username'] : '',

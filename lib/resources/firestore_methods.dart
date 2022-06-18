@@ -43,11 +43,47 @@ class FirestoreMethods {
   Future<Iterable<String>> fetchUserFollowing() {
     // gets the ids of all users that the current user is following
     return _firestore
-        .collection("follows")
+        .collection("users")
         .doc(_auth.currentUser!.uid)
-        .collection("userFollows")
+        .collection("following")
         .get()
         .then((value) => value.docs.map((e) => e.id));
+  }
+
+  Future<void> followUser(uid) async {
+    // update current user's following collection
+    _firestore
+        .collection("users")
+        .doc(_auth.currentUser!.uid)
+        .collection("following")
+        .doc(uid)
+        .set({});
+
+    // update followed user's follows collection
+    _firestore
+        .collection("users")
+        .doc(uid)
+        .collection("followers")
+        .doc(_auth.currentUser!.uid)
+        .set({});
+  }
+
+  Future<void> unfollowUser(uid) async {
+    // update current user's following collection
+    _firestore
+        .collection("users")
+        .doc(_auth.currentUser!.uid)
+        .collection("following")
+        .doc(uid)
+        .delete();
+
+    // update followed user's follows collection
+    _firestore
+        .collection("users")
+        .doc(uid)
+        .collection("followers")
+        .doc(_auth.currentUser!.uid)
+        .delete();
   }
 
   Future<Iterable<String>> fetchAllUsers() {
