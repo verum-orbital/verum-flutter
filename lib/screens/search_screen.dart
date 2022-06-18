@@ -87,17 +87,6 @@ class _SearchScreenState extends State<SearchScreen> {
                         ),
                         radius: 16,
                       ),
-                      trailing: TextButton(
-                        child: Text(
-                            _userFollows.contains(uid) ? 'Unfollow' : 'Follow'),
-                        onPressed: () => _userFollows.contains(uid)
-                            ? FirestoreMethods()
-                                .unfollowUser(uid)
-                                .then((_) => _getFollows())
-                            : FirestoreMethods()
-                                .followUser(uid)
-                                .then((_) => _getFollows()),
-                      ),
                       title: Text(
                         doc.containsKey('username') ? doc['username'] : '',
                       ),
