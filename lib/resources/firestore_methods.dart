@@ -51,20 +51,38 @@ class FirestoreMethods {
   }
 
   Future<void> followUser(uid) async {
+    // update current user's following collection
     _firestore
         .collection("users")
         .doc(_auth.currentUser!.uid)
         .collection("following")
         .doc(uid)
         .set({});
+
+    // update followed user's follows collection
+    _firestore
+        .collection("users")
+        .doc(uid)
+        .collection("followers")
+        .doc(_auth.currentUser!.uid)
+        .set({});
   }
 
   Future<void> unfollowUser(uid) async {
+    // update current user's following collection
     _firestore
         .collection("users")
         .doc(_auth.currentUser!.uid)
         .collection("following")
         .doc(uid)
+        .delete();
+
+    // update followed user's follows collection
+    _firestore
+        .collection("users")
+        .doc(uid)
+        .collection("followers")
+        .doc(_auth.currentUser!.uid)
         .delete();
   }
 
