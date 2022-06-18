@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:verum_flutter/screens/profile_screen.dart';
 import 'package:verum_flutter/utils/colors.dart';
 import 'package:verum_flutter/utils/global_variables.dart';
 
@@ -78,22 +79,13 @@ class _SearchScreenState extends State<SearchScreen> {
                     final doc =
                         snapshotData.docs[index].data() as Map<String, dynamic>;
                     return ListTile(
+                      onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                          builder: (ctx) => ProfileScreen(uid: uid))),
                       leading: CircleAvatar(
                         backgroundImage: NetworkImage(
                           doc.containsKey('avatarURL') ? doc['avatarURL'] : '',
                         ),
                         radius: 16,
-                      ),
-                      trailing: TextButton(
-                        child: Text(
-                            _userFollows.contains(uid) ? 'Unfollow' : 'Follow'),
-                        onPressed: () => _userFollows.contains(uid)
-                            ? FirestoreMethods()
-                                .unfollowUser(uid)
-                                .then((_) => _getFollows())
-                            : FirestoreMethods()
-                                .followUser(uid)
-                                .then((_) => _getFollows()),
                       ),
                       title: Text(
                         doc.containsKey('username') ? doc['username'] : '',
