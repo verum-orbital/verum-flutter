@@ -49,18 +49,22 @@ class _SearchScreenState extends State<SearchScreen> {
                     child: CircularProgressIndicator(),
                   );
                 }
+                final snapshotData = snapshot.data! as QuerySnapshot;
+
                 return ListView.builder(
-                  itemCount: (snapshot.data! as dynamic).docs.length,
+                  itemCount: snapshotData.docs.length,
                   itemBuilder: (context, index) {
+                    final doc =
+                        snapshotData.docs[index].data() as Map<String, dynamic>;
                     return ListTile(
                       leading: CircleAvatar(
                         backgroundImage: NetworkImage(
-                          (snapshot.data! as dynamic).docs[index]['avatarURL'],
+                          doc.containsKey('avatarURL') ? doc['avatarURL'] : '',
                         ),
                         radius: 16,
                       ),
                       title: Text(
-                        (snapshot.data! as dynamic).docs[index]['username'],
+                        doc.containsKey('username') ? doc['username'] : '',
                       ),
                     );
                     // InkWell(
