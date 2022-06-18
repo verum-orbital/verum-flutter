@@ -50,6 +50,16 @@ class FirestoreMethods {
         .then((value) => value.docs.map((e) => e.id));
   }
 
+  Future<Iterable<String>> fetchUserFollowers() {
+    // gets the ids of all users that the current user is following
+    return _firestore
+        .collection("users")
+        .doc(_auth.currentUser!.uid)
+        .collection("followers")
+        .get()
+        .then((value) => value.docs.map((e) => e.id));
+  }
+
   Future<void> followUser(uid) async {
     // update current user's following collection
     _firestore
