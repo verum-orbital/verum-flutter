@@ -50,8 +50,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
       isLoading = true;
     });
     try {
-      final followers = (await FirestoreMethods().fetchUserFollowers());
-      final following = (await FirestoreMethods().fetchUserFollowing());
+      final followers = (await FirestoreMethods().fetchUserFollowers(uid: uid));
+      final following = (await FirestoreMethods().fetchUserFollowing(uid: uid));
 
       AuthMethods().getUserDetails(uid: uid).then((value) => setState(() {
             userData = value;

@@ -40,21 +40,23 @@ class FirestoreMethods {
     });
   }
 
-  Future<Iterable<String>> fetchUserFollowing() {
+  Future<Iterable<String>> fetchUserFollowing({String? uid}) {
+    final uidToFetch = uid ?? _auth.currentUser!.uid;
     // gets the ids of all users that the current user is following
     return _firestore
         .collection("users")
-        .doc(_auth.currentUser!.uid)
+        .doc(uidToFetch)
         .collection("following")
         .get()
         .then((value) => value.docs.map((e) => e.id));
   }
 
-  Future<Iterable<String>> fetchUserFollowers() {
+  Future<Iterable<String>> fetchUserFollowers({String? uid}) {
+    final uidToFetch = uid ?? _auth.currentUser!.uid;
     // gets the ids of all users that the current user is following
     return _firestore
         .collection("users")
-        .doc(_auth.currentUser!.uid)
+        .doc(uidToFetch)
         .collection("followers")
         .get()
         .then((value) => value.docs.map((e) => e.id));
