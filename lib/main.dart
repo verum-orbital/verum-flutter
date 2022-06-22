@@ -45,11 +45,7 @@ void main() async {
         .listen((data) => print('Launched with $data'));
 
     FirebaseMessaging.onMessage.listen((message) {
-<<<<<<< HEAD
       print("Received notification: $message containing data ${message.data}");
-=======
-      print("Got message: $message of data ${message.data}");
->>>>>>> 6adf84fccc502d8b88e150b2d8dbff7a923c1fa0
 
       print(message.notification?.title);
       print(message.notification?.body);
