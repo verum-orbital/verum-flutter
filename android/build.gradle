@@ -30,3 +30,6 @@ subprojects {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+
+// For push notifications
+apply plugin: 'com.google.gms.google-services'
