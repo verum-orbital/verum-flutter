@@ -46,11 +46,11 @@ We intend to use Flutter and Firebase to develop Verum.
 - User Authentication ✅  
 - User Profile ✅
 - Upload posts ✅
-- View post history
-- Post timing restrictions
+- View post history ✅
+- Post timing restrictions (KIV)
 - Push notifications
-- Relationship system (e.g. Follow & Unfollow, Friend & Unfriend, etc)
-- View other users’ posts
+- Relationship system (e.g. Follow & Unfollow, Friend & Unfriend, etc) ✅
+- View other users’ posts ✅
 
 
 #### Features to be completed by the mid of July: 
