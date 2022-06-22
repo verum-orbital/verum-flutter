@@ -306,7 +306,11 @@
 /* Begin XCBuildConfiguration section */
 		249021D3217E4FDB00AE95B9 /* Profile */ = {
 			isa = XCBuildConfiguration;
+<<<<<<< Updated upstream
 			baseConfigurationReference = 9740EEB31CF90195004384FC /* Generated.xcconfig */;
+=======
+			baseConfigurationReference = 3071BC6910F4397E64D524DE /* Pods-Runner.profile.xcconfig */;
+>>>>>>> Stashed changes
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -382,7 +386,11 @@
 		};
 		97C147031CF9000F007C117D /* Debug */ = {
 			isa = XCBuildConfiguration;
+<<<<<<< Updated upstream
 			baseConfigurationReference = 9740EEB31CF90195004384FC /* Generated.xcconfig */;
+=======
+			baseConfigurationReference = 39F0DE1A1633B16F421D4E43 /* Pods-Runner.debug.xcconfig */;
+>>>>>>> Stashed changes
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
