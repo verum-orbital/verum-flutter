@@ -66,44 +66,44 @@ We intend to use Flutter and Firebase to develop Verum.
 
 ### User Flow / Design Diagram
 
-<img width="878" alt="Verum User Flow" src="https://user-images.githubusercontent.com/81674501/170904715-dbef8206-d351-4bb3-a15a-c4788d1fcf18.png">
+<img width="878" alt="Verum User Flow" src="https://raw.github.com/verum-orbital/verum-flutter/master/README_assets/VerumUserFlow.png">
 
 ### Firestore Database Schema
 
-<img width="1012" alt="Firestore DB Schema" src="https://user-images.githubusercontent.com/81674501/170904865-4d01a76e-37d2-4b43-89cd-76086d59ae5c.png">
+<img width="1012" alt="Firestore DB Schema" src="https://raw.github.com/verum-orbital/verum-flutter/master/README_assets/FirestoreDBSchema.png">
 
 
 ### Login Screen
 
-<img src="https://user-images.githubusercontent.com/81674501/170652498-0f1c1299-0a27-46af-8dcb-e67cba875831.png" width="200">
+<img src="https://raw.github.com/verum-orbital/verum-flutter/master/README_assets/LoginScreen.png" width="200">
 
 - Users are able to login with their registered email and password
 - This is done via Firebase Authentication
  
 ### Sign-up Screen
 
-<img src="https://user-images.githubusercontent.com/81674501/170652484-b5c498d4-1d02-4186-8ab6-0672fee73476.png" width="200">
+<img src="https://raw.github.com/verum-orbital/verum-flutter/master/README_assets/SignupScreen.png" width="200">
 
 - Users are able to register with an email and password
 - This is done via Firebase Authentication
 
 ### Sign-out Button in Profile Screen
 
-<img src="https://user-images.githubusercontent.com/81674501/170652527-b48d56e1-a504-484c-895b-9889925de3e6.png" width="200">
+<img src="https://raw.github.com/verum-orbital/verum-flutter/master/README_assets/SignOutButton.png" width="200">
 
 ### Add Post Screen
 
-<img src="https://user-images.githubusercontent.com/81674501/170652659-7df69372-f8d8-4730-9d67-9872c4967368.png" width="200">
+<img src="https://raw.github.com/verum-orbital/verum-flutter/master/README_assets/CreatePostButton.png" width="200">
 
 - Clicking the upload button brings up a dialog that can take the user to his/her device's image gallery or camera.
 
-<img src="https://user-images.githubusercontent.com/81674501/170652644-e258c3ea-53ce-4a08-a055-1e74888c0067.png" width="200">
+<img src="https://raw.github.com/verum-orbital/verum-flutter/master/README_assets/CreatePostScreen.png" width="200">
 
 - Users are able to create a post with a caption using an image from their device's gallery or camera
 
 ### User Feed Screen
 
-<img src="https://user-images.githubusercontent.com/81674501/170652668-17a20a41-a98d-4fd5-8968-bde2459f4491.png" width="200">
+<img src="https://raw.github.com/verum-orbital/verum-flutter/master/README_assets/FeedScreen.png" width="200">
 
 - Users are able to view posts from followed users.  
 - Note: The follow/unfollow system is currently not implemented in the app. This was achieved by manually adding documents to the Firestore Database.
