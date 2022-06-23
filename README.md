@@ -27,11 +27,11 @@ These alerts will be sent out minimally twice a day so users have two chances to
 
 ## User Stories
 
-Whenever an alert is received, users are given fifteen minutes to capture a video or picture.
-Minimally two alerts will be given per day, so that in the slightest chance when users do not have their phone on them during the first alert, they will still be able to post something when the second alert is received. 
-At the end of the day, the user can choose to post one photo or video from all the memories that they have captured from the day.
-Users will be able to find other friends and family on the application and look at their profile.
-Users will be able to get a snapshot of their favourite celebrity and role models lives. 
+- Whenever an alert is received, users are given fifteen minutes to capture a video or picture.
+- Minimally two alerts will be given per day, so that in the slightest chance when users do not have their phone on them during the first alert, they will still be able to post something when the second alert is received. 
+- At the end of the day, the user can choose to post one photo or video from all the memories that they have captured from the day.
+- Users will be able to find other friends and family on the application and look at their profile.
+- Users will be able to get a snapshot of their favourite celebrity and role models lives. 
 
 
 
