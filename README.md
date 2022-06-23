@@ -144,5 +144,5 @@ We intend to use Flutter and Firebase to develop Verum.
  flutter run
  ```
 
-- If you have an android device, you may test our app directly by installing the apk file [here](https://drive.google.com/file/d/1k8aEa3_fC8D00PhxEAMB7NmOn59QZNE5/view?usp=sharing)
+- If you have an android device, you may test our app directly by installing the apk file [here](https://drive.google.com/file/d/1kAs3BcBlSxf79rElcdDr1YBiy2Udrbgv/view?usp=sharing)
 
