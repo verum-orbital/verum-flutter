@@ -132,7 +132,17 @@ We intend to use Flutter and Firebase to develop Verum.
 - Users are able to view posts from followed users. 
 - Note: The likes and comments system is currently not implemented in the app. Placeholders were used instead.
 
-### App Bundle Distribution
 
-If you have an android device, you may test our app yourself by installing the apk file [here](https://drive.google.com/file/d/1k8aEa3_fC8D00PhxEAMB7NmOn59QZNE5/view?usp=sharing)
+### User Testing
+
+- To run Verum on your own system, you must have the [Flutter SDK](https://docs.flutter.dev/get-started/install) installed on your system. 
+  - Once installed, you can run `flutter doctor` to determine any other missing requirements for your relevant platform. 
+  - Once your environment has been set up, launch a simulator or connect an Android/iOS device. 
+  - Clone the repo via git with the URL: https://github.com/verum-orbital/verum-flutter.git
+  - Run the following command from the root directory to build and deploy the demo to your device: 
+ ```
+ flutter run
+ ```
+
+- If you have an android device, you may test our app directly by installing the apk file [here](https://drive.google.com/file/d/1k8aEa3_fC8D00PhxEAMB7NmOn59QZNE5/view?usp=sharing)
 
