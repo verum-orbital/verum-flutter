@@ -27,11 +27,11 @@ These alerts will be sent out minimally twice a day so users have two chances to
 
 ## User Stories
 
-- Whenever an alert is received, users are given fifteen minutes to capture a video or picture.
-- Minimally two alerts will be given per day, so that in the slightest chance when users do not have their phone on them during the first alert, they will still be able to post something when the second alert is received. 
-- At the end of the day, the user can choose to post one photo or video from all the memories that they have captured from the day.
-- Users will be able to find other friends and family on the application and look at their profile.
-- Users will be able to get a snapshot of their favourite celebrity and role models lives. 
+- As a user, I wish people would be more authentic on Social Media.
+- As a celebrity, I do not want to always post intentional and professional pictures at all time. I want to be more genuine with my audience.
+- As a model, I want to show my audience that I am not perfect and I also have my own flaws in my body.
+- As a teenager, perfect pictures on Social Media makes me question my own body and feel very unconfident in myself. 
+- As a parent, knowing Social Media depicts the ideal lifestlye and choices, I wish users and my children do not get the wrong idea of what perfection is. 
 
 
 
