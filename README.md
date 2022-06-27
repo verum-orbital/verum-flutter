@@ -27,11 +27,11 @@ These alerts will be sent out minimally twice a day so users have two chances to
 
 ## User Stories
 
-- As a user, I wish people would be more authentic on Social Media.
-- As a celebrity, I do not want to always post intentional and professional pictures at all time. I want to be more genuine with my audience.
-- As a model, I want to show my audience that I am not perfect and I also have my own flaws in my body.
-- As a teenager, perfect pictures on Social Media makes me question my own body and feel very unconfident in myself. 
-- As a parent, knowing Social Media depicts the ideal lifestlye and choices, I wish users and my children do not get the wrong idea of what perfection is. 
+- As a user, I can be more authentic on Social Media.
+- As a celebrity, I can be more genuine with my audience and not have to always post intentional and professional pictures all the time. 
+- As a model, I can show my audience that I am not perfect and I also have my own flaws in my body.
+- As a teenager, seeing the flaws of my role models will help feel more secure with my own body and feel more confident in myself. 
+- As a parent, knowing Social Media depicts the ideal lifestlye and choices, I will be at greater peace as I know users and my children do not have the wrong idea of what perfection is. 
 
 
 
