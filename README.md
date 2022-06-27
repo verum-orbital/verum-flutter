@@ -27,12 +27,10 @@ These alerts will be sent out minimally twice a day so users have two chances to
 
 ## User Stories
 
-- As a user, I can be more authentic on Social Media.
-- As a celebrity, I can be more genuine with my audience and not have to always post intentional and professional pictures all the time. 
-- As a model, I can show my audience that I am not perfect and I also have my own flaws in my body.
-- As a teenager, seeing the flaws of my role models will help feel more secure with my own body and feel more confident in myself. 
-- As a parent, knowing Social Media depicts the ideal lifestlye and choices, I will be at greater peace as I know users and my children do not have the wrong idea of what perfection is. 
-
+- As a user, I can receive notifications from the people I care about so that I can stay updated in their lives.
+- As a user, I can view posts from my role models and be confident of the fact that the post was made in a spontaneous and organic manner.
+- As a creator, I can make posts that are more authentic on Social Media so that I do not feel pressured to hide my true feelings and emotions.
+- As an influencer or model, I can upload pictures that show my audience that I am not perfect and I also have my own flaws in my body.
 
 
 ## Proposed Features and Timeline
