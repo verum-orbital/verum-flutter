@@ -19,7 +19,9 @@ class FirestoreMethods {
           uid: _auth.currentUser!.uid,
           caption: caption,
           creationDate: DateTime.now(),
-          mediaURL: mediaURL);
+          mediaURL: mediaURL,
+          likes: [],
+        );
 
       await _firestore
           .collection("posts")
@@ -104,5 +106,22 @@ class FirestoreMethods {
         .collection("users")
         .get()
         .then((value) => value.docs.map((e) => e.id));
+  }
+
+  Future<void> likePost(String postId, String uid, List likes) async {
+    try {
+      if(likes.contains(uid)) {
+        await _firestore.collection("posts").doc(uid).collection("userPosts").doc(postId).update({
+          'likes': FieldValue.arrayRemove([uid]),
+        });
+      }
+      else {
+        await _firestore.collection("posts").doc(uid).collection("userPosts").doc(postId).update({
+          'likes': FieldValue.arrayUnion([uid]),
+        });
+      }
+    } catch(e) {
+      print(e.toString());
+    }
   }
 }

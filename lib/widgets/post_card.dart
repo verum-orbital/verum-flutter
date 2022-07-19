@@ -120,7 +120,16 @@ class _PostCardState extends State<PostCard> {
               IconButton(
                 onPressed: () {},
                 icon: const Icon(Icons.send),
-              )
+              ),
+              Expanded(
+                child: Align(
+                  alignment: Alignment.bottomRight,
+                  child: IconButton(
+                    icon: const Icon(Icons.bookmark_border),
+                    onPressed: () {},
+                  ),
+                ),
+              ),
             ],
           ),
 
@@ -131,6 +140,16 @@ class _PostCardState extends State<PostCard> {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                DefaultTextStyle(
+                  style: Theme.of(context)
+                      .textTheme
+                      .subtitle2!
+                      .copyWith(fontWeight: FontWeight.w800),
+                  child: Text(
+                    '1,231 likes',
+                    style: Theme.of(context).textTheme.bodyText2,
+                  ),
+                ),
                 Container(
                   width: double.infinity,
                   padding: const EdgeInsets.only(top: 8),
