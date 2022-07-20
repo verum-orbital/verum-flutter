@@ -8,6 +8,7 @@ import 'package:verum_flutter/models/post.dart';
 import 'package:verum_flutter/models/user.dart';
 import 'package:verum_flutter/providers/user_provider.dart';
 import 'package:verum_flutter/resources/firestore_methods.dart';
+import 'package:verum_flutter/screens/comments_screen.dart';
 import 'package:verum_flutter/utils/colors.dart';
 import 'package:verum_flutter/utils/global_variables.dart';
 import 'package:verum_flutter/widgets/like_animation.dart';
@@ -112,11 +113,13 @@ class _PostCardState extends State<PostCard> {
 
           //IMAGE
           GestureDetector(
-            onDoubleTap: (() {
+            onDoubleTap: () async {
+              await FirestoreMethods()
+                  .likePost(widget.post.uid, currentUserUid, widget.post.likes);
               setState(() {
                 isLikeAnimating = true;
               });
-            }),
+            },
             child: Stack(
               alignment: Alignment.center,
               children: [
@@ -158,15 +161,26 @@ class _PostCardState extends State<PostCard> {
                 isAnimating: widget.post.likes.contains(currentUserUid),
                 smallLike: true,
                 child: IconButton(
-                  onPressed: () {},
-                  icon: const Icon(
-                    Icons.favorite,
-                    color: Colors.red,
-                  ),
+                  onPressed: () async {
+                    await FirestoreMethods().likePost(
+                        widget.post.uid, currentUserUid, widget.post.likes);
+                  },
+                  icon: widget.post.likes.contains(currentUserUid)
+                      ? const Icon(
+                          Icons.favorite,
+                          color: Colors.red,
+                        )
+                      : const Icon(
+                          Icons.favorite_border,
+                        ),
                 ),
               ),
               IconButton(
-                onPressed: () {},
+                onPressed: () => Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => CommentsScreen(post: widget.post),
+                  ),
+                ),
                 icon: const Icon(Icons.comment_outlined),
               ),
               IconButton(
