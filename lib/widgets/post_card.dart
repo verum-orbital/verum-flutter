@@ -2,10 +2,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:provider/provider.dart';
 import 'package:verum_flutter/models/post.dart';
+import 'package:verum_flutter/models/user.dart';
+import 'package:verum_flutter/providers/user_provider.dart';
 import 'package:verum_flutter/resources/firestore_methods.dart';
 import 'package:verum_flutter/utils/colors.dart';
 import 'package:verum_flutter/utils/global_variables.dart';
+import 'package:verum_flutter/widgets/like_animation.dart';
 
 import '../models/user.dart' as userModel;
 
@@ -20,6 +24,8 @@ class PostCard extends StatefulWidget {
 class _PostCardState extends State<PostCard> {
   userModel.User _user = userModel.User(
       email: '', username: '', bio: '', avatarURL: placeholderAvatarImageURL);
+
+  bool isLikeAnimating = false;
 
   @override
   void initState() {
@@ -37,6 +43,7 @@ class _PostCardState extends State<PostCard> {
 
   @override
   Widget build(BuildContext context) {
+    final User scrollingUser = Provider.of<UserProvider>(context).getUser;
     return Container(
         color: mobileBackgroundColor,
         padding: const EdgeInsets.symmetric(vertical: 10),
@@ -95,22 +102,58 @@ class _PostCardState extends State<PostCard> {
           ),
 
           //IMAGE
-          SizedBox(
-            height: MediaQuery.of(context).size.height * 0.35,
-            width: double.infinity,
-            child: Image.network(
-              widget.post.mediaURL,
-              fit: BoxFit.cover,
+          GestureDetector(
+            onDoubleTap: (() {
+              setState(() {
+                isLikeAnimating = true;
+              });
+            }),
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.35,
+                  width: double.infinity,
+                  child: Image.network(
+                    widget.post.mediaURL,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                AnimatedOpacity(
+                  duration: const Duration(milliseconds: 200),
+                  opacity: isLikeAnimating ? 1 : 0,
+                  child: LikeAnimation(
+                    child: const Icon(
+                      Icons.favorite,
+                      color: Colors.white,
+                      size: 100,
+                    ),
+                    isAnimating: isLikeAnimating,
+                    duration: const Duration(
+                      milliseconds: 400,
+                    ),
+                    onEnd: (() {
+                      setState(() {
+                        isLikeAnimating = false;
+                      });
+                    }),
+                  ),
+                )
+              ],
             ),
           ),
           // LIKE, COMMENT SECTION
           Row(
             children: [
-              IconButton(
-                onPressed: () {},
-                icon: const Icon(
-                  Icons.favorite,
-                  color: Colors.red,
+              LikeAnimation(
+                isAnimating: widget.post.likes.contains(scrollingUser.username),
+                smallLike: true,
+                child: IconButton(
+                  onPressed: () {},
+                  icon: const Icon(
+                    Icons.favorite,
+                    color: Colors.red,
+                  ),
                 ),
               ),
               IconButton(
@@ -146,7 +189,8 @@ class _PostCardState extends State<PostCard> {
                       .subtitle2!
                       .copyWith(fontWeight: FontWeight.w800),
                   child: Text(
-                    '1,231 likes',
+                    // ${widget.post.likes.length}
+                    '1,223 likes',
                     style: Theme.of(context).textTheme.bodyText2,
                   ),
                 ),

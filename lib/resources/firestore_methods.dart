@@ -16,12 +16,12 @@ class FirestoreMethods {
           await StorageMethods().uploadImage('userPosts', image, true);
 
       model.Post post = model.Post(
-          uid: _auth.currentUser!.uid,
-          caption: caption,
-          creationDate: DateTime.now(),
-          mediaURL: mediaURL,
-          likes: [],
-        );
+        uid: _auth.currentUser!.uid,
+        caption: caption,
+        creationDate: DateTime.now(),
+        mediaURL: mediaURL,
+        likes: [],
+      );
 
       await _firestore
           .collection("posts")
@@ -108,19 +108,28 @@ class FirestoreMethods {
         .then((value) => value.docs.map((e) => e.id));
   }
 
-  Future<void> likePost(String postId, String uid, List likes) async {
+  Future<void> likePost(String postId, String username, List likes) async {
     try {
-      if(likes.contains(uid)) {
-        await _firestore.collection("posts").doc(uid).collection("userPosts").doc(postId).update({
+      if (likes.contains(username)) {
+        await _firestore
+            .collection("posts")
+            .doc(uid)
+            .collection("userPosts")
+            .doc(postId)
+            .update({
           'likes': FieldValue.arrayRemove([uid]),
         });
-      }
-      else {
-        await _firestore.collection("posts").doc(uid).collection("userPosts").doc(postId).update({
+      } else {
+        await _firestore
+            .collection("posts")
+            .doc(uid)
+            .collection("userPosts")
+            .doc(postId)
+            .update({
           'likes': FieldValue.arrayUnion([uid]),
         });
       }
-    } catch(e) {
+    } catch (e) {
       print(e.toString());
     }
   }
