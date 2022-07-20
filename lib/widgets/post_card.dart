@@ -53,6 +53,8 @@ class _PostCardState extends State<PostCard> {
   Widget build(BuildContext context) {
     // final User scrollingUser = Provider.of<UserProvider>(context).getUser;
     final String currentUserUid = FirebaseAuth.instance.currentUser!.uid;
+    // final userModel.User currentUserUid =
+    //     Provider.of<UserProvider>(context).getUser;
     return Container(
         color: mobileBackgroundColor,
         padding: const EdgeInsets.symmetric(vertical: 10),
@@ -112,7 +114,9 @@ class _PostCardState extends State<PostCard> {
 
           //IMAGE
           GestureDetector(
-            onDoubleTap: (() {
+            onDoubleTap: (() async {
+              await FirestoreMethods().likePost(
+                  widget.post.postId, widget.post.uid, widget.post.likes);
               setState(() {
                 isLikeAnimating = true;
               });
@@ -158,11 +162,18 @@ class _PostCardState extends State<PostCard> {
                 isAnimating: widget.post.likes.contains(currentUserUid),
                 smallLike: true,
                 child: IconButton(
-                  onPressed: () {},
-                  icon: const Icon(
-                    Icons.favorite,
-                    color: Colors.red,
-                  ),
+                  onPressed: () async {
+                    await FirestoreMethods().likePost(
+                        widget.post.postId, widget.post.uid, widget.post.likes);
+                  },
+                  icon: widget.post.likes.contains(currentUserUid)
+                      ? const Icon(
+                          Icons.favorite,
+                          color: Colors.red,
+                        )
+                      : const Icon(
+                          Icons.favorite_border,
+                        ),
                 ),
               ),
               IconButton(

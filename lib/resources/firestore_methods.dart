@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:uuid/uuid.dart';
 import 'package:verum_flutter/models/user.dart' as userModel;
 import 'package:verum_flutter/models/post.dart' as model;
 import 'package:verum_flutter/resources/storage_methods.dart';
@@ -14,12 +15,14 @@ class FirestoreMethods {
     try {
       String mediaURL =
           await StorageMethods().uploadImage('userPosts', image, true);
+      String postId = const Uuid().v1();
 
       model.Post post = model.Post(
         uid: _auth.currentUser!.uid,
         caption: caption,
         creationDate: DateTime.now(),
         mediaURL: mediaURL,
+        postId: postId,
         likes: [],
       );
 
@@ -27,7 +30,8 @@ class FirestoreMethods {
           .collection("posts")
           .doc(_auth.currentUser!.uid)
           .collection("userPosts")
-          .add(post.toJson());
+          .doc(postId)
+          .set(post.toJson());
 
       return "success";
     } catch (err) {
@@ -110,14 +114,14 @@ class FirestoreMethods {
 
   Future<void> likePost(String postId, String uid, List likes) async {
     try {
-      if (likes.contains(uid)) {
+      if (likes.contains(_auth.currentUser!.uid)) {
         await _firestore
             .collection("posts")
             .doc(uid)
             .collection("userPosts")
             .doc(postId)
             .update({
-          'likes': FieldValue.arrayRemove([uid]),
+          'likes': FieldValue.arrayRemove([_auth.currentUser!.uid]),
         });
       } else {
         await _firestore
@@ -126,7 +130,7 @@ class FirestoreMethods {
             .collection("userPosts")
             .doc(postId)
             .update({
-          'likes': FieldValue.arrayUnion([uid]),
+          'likes': FieldValue.arrayUnion([_auth.currentUser!.uid]),
         });
       }
     } catch (e) {
