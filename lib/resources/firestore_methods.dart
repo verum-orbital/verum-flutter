@@ -108,9 +108,9 @@ class FirestoreMethods {
         .then((value) => value.docs.map((e) => e.id));
   }
 
-  Future<void> likePost(String postId, String username, List likes) async {
+  Future<void> likePost(String postId, String uid, List likes) async {
     try {
-      if (likes.contains(username)) {
+      if (likes.contains(uid)) {
         await _firestore
             .collection("posts")
             .doc(uid)

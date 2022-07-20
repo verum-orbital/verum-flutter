@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -41,9 +42,17 @@ class _PostCardState extends State<PostCard> {
     });
   }
 
+  // int countLikes(List<String> uid) {
+  //   if (uid != null) {
+  //     return uid.length;
+  //   }
+  //   return 0;
+  // }
+
   @override
   Widget build(BuildContext context) {
-    final User scrollingUser = Provider.of<UserProvider>(context).getUser;
+    // final User scrollingUser = Provider.of<UserProvider>(context).getUser;
+    final String currentUserUid = FirebaseAuth.instance.currentUser!.uid;
     return Container(
         color: mobileBackgroundColor,
         padding: const EdgeInsets.symmetric(vertical: 10),
@@ -146,7 +155,7 @@ class _PostCardState extends State<PostCard> {
           Row(
             children: [
               LikeAnimation(
-                isAnimating: widget.post.likes.contains(scrollingUser.username),
+                isAnimating: widget.post.likes.contains(currentUserUid),
                 smallLike: true,
                 child: IconButton(
                   onPressed: () {},
@@ -190,7 +199,7 @@ class _PostCardState extends State<PostCard> {
                       .copyWith(fontWeight: FontWeight.w800),
                   child: Text(
                     // ${widget.post.likes.length}
-                    '1,223 likes',
+                    '${widget.post.likes.length} likes',
                     style: Theme.of(context).textTheme.bodyText2,
                   ),
                 ),
