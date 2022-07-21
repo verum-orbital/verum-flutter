@@ -8,6 +8,7 @@ import 'package:verum_flutter/models/post.dart';
 import 'package:verum_flutter/models/user.dart';
 import 'package:verum_flutter/providers/user_provider.dart';
 import 'package:verum_flutter/resources/firestore_methods.dart';
+import 'package:verum_flutter/screens/comments_screen.dart';
 import 'package:verum_flutter/utils/colors.dart';
 import 'package:verum_flutter/utils/global_variables.dart';
 import 'package:verum_flutter/widgets/like_animation.dart';
@@ -53,9 +54,8 @@ class _PostCardState extends State<PostCard> {
   Widget build(BuildContext context) {
     final userModel.User scrollingUser =
         Provider.of<UserProvider>(context).getUser;
-    final String currentUserUid = FirebaseAuth.instance.currentUser!.uid;
-    // final userModel.User currentUserUid =
-    //     Provider.of<UserProvider>(context).getUser;
+    final userModel.User currentUserUid =
+        Provider.of<UserProvider>(context).getUser;
     return Container(
         color: mobileBackgroundColor,
         padding: const EdgeInsets.symmetric(vertical: 10),
@@ -181,7 +181,11 @@ class _PostCardState extends State<PostCard> {
                 ),
               ),
               IconButton(
-                onPressed: () {},
+                onPressed: () => Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => CommentsScreen(snap: widget.post),
+                  ),
+                ),
                 icon: const Icon(Icons.comment_outlined),
               ),
               IconButton(
