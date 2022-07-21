@@ -112,25 +112,28 @@ class FirestoreMethods {
         .then((value) => value.docs.map((e) => e.id));
   }
 
-  Future<void> likePost(String postId, String uid, List likes) async {
+  Future<void> likePost(
+      String postId, String uid, List likes, String username) async {
     try {
-      if (likes.contains(_auth.currentUser!.uid)) {
+      if (likes.contains(username)) {
+        print('Like present');
         await _firestore
             .collection("posts")
             .doc(uid)
             .collection("userPosts")
             .doc(postId)
             .update({
-          'likes': FieldValue.arrayRemove([_auth.currentUser!.uid]),
+          'likes': FieldValue.arrayRemove([username]),
         });
       } else {
+        print('Just liked the picture');
         await _firestore
             .collection("posts")
             .doc(uid)
             .collection("userPosts")
             .doc(postId)
             .update({
-          'likes': FieldValue.arrayUnion([_auth.currentUser!.uid]),
+          'likes': FieldValue.arrayUnion([username]),
         });
       }
     } catch (e) {
