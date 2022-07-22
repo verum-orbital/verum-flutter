@@ -147,7 +147,7 @@ We intend to use Flutter and Firebase to develop Verum.
 
 <img src="https://raw.github.com/verum-orbital/verum-flutter/master/README_assets/UserScoreLow.png" width="200">
 
-<img src="https://raw.github.com/verum-orbital/verum-flutter/master/README_assets/UserScoreHigh.png" width="200>
+<img src="https://raw.github.com/verum-orbital/verum-flutter/master/README_assets/UserScoreHigh.png" width="200">
 
 - Users now have an associated score that can be seen in their profile page. This represents how well they have followed the spirit of the app. Our current algorithm calculates this score based on the ratio between the number of posts created by the user, and the number of posting opportunities they have had. 
 - Different colours are used to display a user's score for quick visual indication of whether it is a high or low score.
