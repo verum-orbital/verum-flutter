@@ -22,14 +22,15 @@ class AuthMethods {
     required String password,
     required String username,
     required String bio,
-    required Uint8List file,
+    required Uint8List? file,
   }) async {
+    print("SINGNING UP");
     String res = "Some error Occurred";
     try {
-      if (email.isNotEmpty ||
-          password.isNotEmpty ||
-          username.isNotEmpty ||
-          bio.isNotEmpty ||
+      if (email.isNotEmpty &&
+          password.isNotEmpty &&
+          username.isNotEmpty &&
+          bio.isNotEmpty &&
           file != null) {
         // registering user in auth with email and password
         UserCredential cred = await _auth.createUserWithEmailAndPassword(
@@ -57,7 +58,9 @@ class AuthMethods {
         res = "success";
         print('successfully registered user: ${cred.user?.uid}');
       } else {
-        res = "Please enter all the fields";
+        res = file == null
+            ? "Please add a profile picture"
+            : "Please enter all the fields";
       }
     } on FirebaseAuthException catch (err) {
       switch (err.code) {

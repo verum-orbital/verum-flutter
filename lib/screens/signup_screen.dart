@@ -47,7 +47,7 @@ class _SignupScreenState extends State<SignupScreen> {
         password: _pwController.text,
         username: _usernameController.text,
         bio: _bioController.text,
-        file: _selectedAvatar!);
+        file: _selectedAvatar);
 
     if (res == 'success') {
       Navigator.of(context).pushReplacement(MaterialPageRoute(
