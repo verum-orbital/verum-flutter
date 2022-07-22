@@ -56,10 +56,23 @@ class _PostCardState extends State<PostCard> {
     });
   }
 
-  void likePost(String username) async {
-    print(post.postId);
+  bool checkUserLikes(dynamic likes) {
+    final String? uid = FirebaseAuth.instance.currentUser?.uid;
+    if (uid == null || likes == null) {
+      // Error handling
+      return false;
+    }
+    return likes.contains(uid);
+  }
+
+  void likePost() async {
+    final String? uid = FirebaseAuth.instance.currentUser?.uid;
+    if (uid == null) {
+      // Error handling
+      return;
+    }
     await FirestoreMethods()
-        .likePost(post.postId, post.uid, post.likes, username)
+        .likePost(post.postId, post.uid, post.likes, uid)
         .then((_) => refreshPost());
 
     setState(() {
@@ -75,20 +88,10 @@ class _PostCardState extends State<PostCard> {
     });
   }
 
-  // int countLikes(List<String> uid) {
-  //   if (uid != null) {
-  //     return uid.length;
-  //   }
-  //   return 0;
-  // }
-
   @override
   Widget build(BuildContext context) {
     final userModel.User scrollingUser =
         Provider.of<UserProvider>(context).getUser;
-    final String currentUserUid = FirebaseAuth.instance.currentUser!.uid;
-    // final userModel.User currentUserUid =
-    //     Provider.of<UserProvider>(context).getUser;
     return Container(
         color: mobileBackgroundColor,
         padding: const EdgeInsets.symmetric(vertical: 10),
@@ -148,7 +151,7 @@ class _PostCardState extends State<PostCard> {
 
           //IMAGE
           GestureDetector(
-            onDoubleTap: () => likePost(scrollingUser.username),
+            onDoubleTap: likePost,
             child: Stack(
               alignment: Alignment.center,
               children: [
@@ -187,11 +190,11 @@ class _PostCardState extends State<PostCard> {
           Row(
             children: [
               LikeAnimation(
-                isAnimating: checkUsername(post.likes, scrollingUser.username),
+                isAnimating: checkUserLikes(post.likes),
                 smallLike: true,
                 child: IconButton(
-                  onPressed: () => likePost(scrollingUser.username),
-                  icon: checkUsername(post.likes, scrollingUser.username)
+                  onPressed: likePost,
+                  icon: checkUserLikes(post.likes)
                       ? const Icon(
                           Icons.favorite,
                           color: Colors.red,
@@ -258,7 +261,7 @@ class _PostCardState extends State<PostCard> {
                   onTap: () {},
                   child: Container(
                     padding: const EdgeInsets.symmetric(vertical: 4),
-                    child: Text(
+                    child: const Text(
                       'View all comments...',
                       style:
                           const TextStyle(fontSize: 16, color: secondaryColor),
@@ -276,13 +279,5 @@ class _PostCardState extends State<PostCard> {
             ),
           ),
         ]));
-  }
-
-  bool checkUsername(dynamic likes, String username) {
-    if (likes == null) {
-      return false;
-    } else {
-      return likes.contains(username);
-    }
   }
 }
