@@ -23,6 +23,8 @@ class PostCard extends StatefulWidget {
 }
 
 class _PostCardState extends State<PostCard> {
+  late Post post = widget.post;
+
   userModel.User _user = userModel.User(
       email: '',
       username: '',
@@ -39,8 +41,34 @@ class _PostCardState extends State<PostCard> {
     getUser();
   }
 
+  Future<void> refreshPost() async {
+    FirebaseFirestore.instance
+        .collection('posts')
+        .doc(post.uid)
+        .collection('userPosts')
+        .doc(post.postId)
+        .get()
+        .then((value) {
+      print("GOT POST");
+      setState(() {
+        post = Post.fromSnapshot(value);
+      });
+    });
+  }
+
+  void likePost(String username) async {
+    print(post.postId);
+    await FirestoreMethods()
+        .likePost(post.postId, post.uid, post.likes, username)
+        .then((_) => refreshPost());
+
+    setState(() {
+      isLikeAnimating = true;
+    });
+  }
+
   void getUser() async {
-    var user = await FirestoreMethods().fetchUser(widget.post.uid);
+    var user = await FirestoreMethods().fetchUser(post.uid);
     print(user);
     setState(() {
       _user = user;
@@ -120,13 +148,7 @@ class _PostCardState extends State<PostCard> {
 
           //IMAGE
           GestureDetector(
-            onDoubleTap: (() async {
-              await FirestoreMethods().likePost(widget.post.postId,
-                  widget.post.uid, widget.post.likes, scrollingUser.username);
-              setState(() {
-                isLikeAnimating = true;
-              });
-            }),
+            onDoubleTap: () => likePost(scrollingUser.username),
             child: Stack(
               alignment: Alignment.center,
               children: [
@@ -134,7 +156,7 @@ class _PostCardState extends State<PostCard> {
                   height: MediaQuery.of(context).size.height * 0.35,
                   width: double.infinity,
                   child: Image.network(
-                    widget.post.mediaURL,
+                    post.mediaURL,
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -165,17 +187,11 @@ class _PostCardState extends State<PostCard> {
           Row(
             children: [
               LikeAnimation(
-                isAnimating: widget.post.likes.contains(scrollingUser.username),
+                isAnimating: checkUsername(post.likes, scrollingUser.username),
                 smallLike: true,
                 child: IconButton(
-                  onPressed: () async {
-                    await FirestoreMethods().likePost(
-                        widget.post.postId,
-                        widget.post.uid,
-                        widget.post.likes,
-                        scrollingUser.username);
-                  },
-                  icon: widget.post.likes.contains(scrollingUser.username)
+                  onPressed: () => likePost(scrollingUser.username),
+                  icon: checkUsername(post.likes, scrollingUser.username)
                       ? const Icon(
                           Icons.favorite,
                           color: Colors.red,
@@ -218,8 +234,8 @@ class _PostCardState extends State<PostCard> {
                       .subtitle2!
                       .copyWith(fontWeight: FontWeight.w800),
                   child: Text(
-                    // ${widget.post.likes.length}
-                    '${widget.post.likes.length} likes',
+                    // ${post.likes.length}
+                    '${post.likes.length} likes',
                     style: Theme.of(context).textTheme.bodyText2,
                   ),
                 ),
@@ -234,7 +250,7 @@ class _PostCardState extends State<PostCard> {
                               text: '${_user.username} ',
                               style:
                                   const TextStyle(fontWeight: FontWeight.bold)),
-                          TextSpan(text: widget.post.caption)
+                          TextSpan(text: post.caption)
                         ]),
                   ),
                 ),
@@ -252,7 +268,7 @@ class _PostCardState extends State<PostCard> {
                 Container(
                   padding: const EdgeInsets.symmetric(vertical: 4),
                   child: Text(
-                    widget.post.creationDate.toString(),
+                    post.creationDate.toString(),
                     style: const TextStyle(fontSize: 16, color: secondaryColor),
                   ),
                 )
@@ -260,5 +276,13 @@ class _PostCardState extends State<PostCard> {
             ),
           ),
         ]));
+  }
+
+  bool checkUsername(dynamic likes, String username) {
+    if (likes == null) {
+      return false;
+    } else {
+      return likes.contains(username);
+    }
   }
 }

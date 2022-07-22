@@ -6,7 +6,7 @@ class Post {
   final DateTime creationDate;
   final String mediaURL;
   final String postId;
-  final likes;
+  final List<String> likes;
 
   const Post(
       {required this.uid,
@@ -21,7 +21,6 @@ class Post {
         'caption': caption,
         'creationDate': creationDate,
         'mediaURL': mediaURL,
-        'postId': postId,
         'likes': likes,
       };
 
@@ -30,10 +29,10 @@ class Post {
     return Post(
       uid: data['uid'],
       caption: data['caption'],
-      creationDate: data['creationDate'],
+      creationDate: (data['creationDate'] as Timestamp).toDate(),
       mediaURL: data['mediaURL'],
-      postId: data['postId'],
-      likes: data['likes'],
+      postId: snapshot.id,
+      likes: List.castFrom(data['likes'] as List),
     );
   }
 
@@ -44,8 +43,8 @@ class Post {
       caption: data['caption'],
       creationDate: (data['creationDate'] as Timestamp).toDate(),
       mediaURL: data['mediaURL'],
-      postId: data['postId'],
-      likes: data['likes'],
+      postId: snapshot.id,
+      likes: List.castFrom(data['likes'] as List),
     );
   }
 }
