@@ -2,7 +2,6 @@ import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:verum_flutter/models/user.dart' as model;
@@ -14,6 +13,7 @@ import 'package:verum_flutter/utils/utils.dart';
 import '../resources/firestore_methods.dart';
 import '../utils/global_variables.dart';
 import '../widgets/follow_button.dart';
+import '../widgets/user_score_indicator.dart';
 
 class ProfileScreen extends StatefulWidget {
   final String? uid;
@@ -302,41 +302,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ),
         ),
       ],
-    );
-  }
-}
-
-class UserScoreIndicator extends StatelessWidget {
-  final double score;
-  const UserScoreIndicator({Key? key, required this.score}) : super(key: key);
-
-  TextStyle getStyle() {
-    TextStyle style = const TextStyle(fontWeight: FontWeight.bold);
-    if (score > 80) {
-      style = style.merge(TextStyle(color: Colors.greenAccent.shade200));
-    } else if (score > 50) {
-      style = style.merge(TextStyle(color: Colors.orangeAccent.shade200));
-    } else {
-      style = style.merge(TextStyle(color: Colors.redAccent.shade200));
-    }
-    return style;
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: const BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.only(
-            topRight: Radius.circular(40.0),
-            bottomRight: Radius.circular(40.0),
-            topLeft: Radius.circular(40.0),
-            bottomLeft: Radius.circular(40.0)),
-      ),
-      child: Text(
-        '${score.toStringAsFixed(1)}',
-        style: getStyle(),
-      ),
     );
   }
 }
