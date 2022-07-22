@@ -51,14 +51,11 @@ We intend to use Flutter and Firebase to develop Verum.
 
 
 #### Features to be completed by the end of July: 
-- Post timing restrictions 
-- Gamification/Points system 
- - Incentivise users to post regularly & abide by timing constraints
- - Allow users to earn “reputation/credibility” that shows how unfiltered their posts are (to what extent they abide by the spirit of the platform) 
-- Privacy Settings (private or public account)
-- Likes System
-- Comment system
-- Chat/Messaging
+- Post timing restrictions ✅
+- Gamification/Points system ✅
+ - Incentivise users to post regularly & abide by timing constraints ✅
+ - Allow users to earn “reputation/credibility” that shows how unfiltered their posts are (to what extent they abide by the spirit of the platform)  ✅
+- Likes System ✅
 
 ## Current Progress
 
