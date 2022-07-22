@@ -33,6 +33,20 @@ class FirestoreMethods {
     }
   }
 
+  Future<void> updateUserFCMToken(String? token) async {
+    if (token == null) {
+      return;
+    }
+
+    final String? uid = FirebaseAuth.instance.currentUser?.uid;
+    _firestore
+        .collection('users')
+        .doc(uid)
+        .update({'fcmToken': token}).then((_) {
+      print("Updated user of id $uid with fcm token $token");
+    });
+  }
+
   Future<userModel.User> fetchUser(String uid) {
     return _firestore.collection('users').doc(uid).get().then((value) {
       print(value.data());

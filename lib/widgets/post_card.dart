@@ -19,7 +19,12 @@ class PostCard extends StatefulWidget {
 
 class _PostCardState extends State<PostCard> {
   userModel.User _user = userModel.User(
-      email: '', username: '', bio: '', avatarURL: placeholderAvatarImageURL);
+      email: '',
+      username: '',
+      bio: '',
+      avatarURL: placeholderAvatarImageURL,
+      postTime: DateTime.now(),
+      numPostOpportunities: 0);
 
   @override
   void initState() {

@@ -9,8 +9,16 @@ import 'package:verum_flutter/screens/search_screen.dart';
 const webScreenWidth = 600;
 const placeholderAvatarImageURL =
     'https://www.kindpng.com/picc/m/207-2074624_white-gray-circle-avatar-png-transparent-png.png';
-const placeholderUser = model.User(
-    email: '', username: '', bio: '', avatarURL: placeholderAvatarImageURL);
+final placeholderUser = model.User(
+    email: '',
+    username: '',
+    bio: '',
+    avatarURL: placeholderAvatarImageURL,
+    postTime: DateTime.now(),
+    numPostOpportunities: 0);
+
+const double userScoreMultiplier = 0.6;
+
 final homeScreenWidgets = [
   FeedScreen(),
   SearchScreen(),

@@ -1,5 +1,8 @@
+import 'dart:math';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:verum_flutter/models/user.dart' as model;
@@ -34,6 +37,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   int numFollowing = 0;
   bool isFollowing = false;
   bool isLoading = false;
+  double userScore = 0;
 
   @override
   void initState() {
@@ -53,25 +57,32 @@ class _ProfileScreenState extends State<ProfileScreen> {
       final followers = (await FirestoreMethods().fetchUserFollowers(uid: uid));
       final following = (await FirestoreMethods().fetchUserFollowing(uid: uid));
 
-      AuthMethods().getUserDetails(uid: uid).then((value) => setState(() {
-            userData = value;
-          }));
-      setState(() {
-        // get post lENGTH
-        userPostsSnapshot = FirebaseFirestore.instance
-            .collection('posts')
-            .doc(uid)
-            .collection('userPosts')
-            .get();
+      AuthMethods().getUserDetails(uid: uid).then((value) {
+        setState(() {
+          userData = value;
 
-        userPostsSnapshot.then((value) => setState(() {
-              postLen = value.docs.length;
-            }));
+          // get post lENGTH
+          userPostsSnapshot = FirebaseFirestore.instance
+              .collection('posts')
+              .doc(uid)
+              .collection('userPosts')
+              .get();
 
-        numFollowers = followers.length;
-        numFollowing = following.length;
+          userPostsSnapshot.then((value) => setState(() {
+                postLen = value.docs.length;
+                userScore = min(
+                        1,
+                        postLen /
+                            ((userData?.numPostOpportunities ?? 1) *
+                                userScoreMultiplier)) *
+                    100;
+              }));
 
-        isFollowing = following.contains(uid);
+          numFollowers = followers.length;
+          numFollowing = following.length;
+
+          isFollowing = following.contains(uid);
+        });
       });
 
       setState(() {});
@@ -110,12 +121,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     children: [
                       Row(
                         children: [
-                          CircleAvatar(
-                            backgroundColor: Colors.grey,
-                            backgroundImage: NetworkImage(
-                              userData?.avatarURL ?? placeholderAvatarImageURL,
-                            ),
-                            radius: 40,
+                          Stack(
+                            alignment: Alignment.topRight,
+                            children: [
+                              CircleAvatar(
+                                backgroundColor: Colors.grey,
+                                backgroundImage: NetworkImage(
+                                  userData?.avatarURL ??
+                                      placeholderAvatarImageURL,
+                                ),
+                                radius: 40,
+                              ),
+                              UserScoreIndicator(score: userScore),
+                            ],
                           ),
                           Expanded(
                             flex: 1,
@@ -284,6 +302,41 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ),
         ),
       ],
+    );
+  }
+}
+
+class UserScoreIndicator extends StatelessWidget {
+  final double score;
+  const UserScoreIndicator({Key? key, required this.score}) : super(key: key);
+
+  TextStyle getStyle() {
+    TextStyle style = const TextStyle(fontWeight: FontWeight.bold);
+    if (score > 80) {
+      style = style.merge(TextStyle(color: Colors.greenAccent.shade200));
+    } else if (score > 50) {
+      style = style.merge(TextStyle(color: Colors.orangeAccent.shade200));
+    } else {
+      style = style.merge(TextStyle(color: Colors.redAccent.shade200));
+    }
+    return style;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: const BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.only(
+            topRight: Radius.circular(40.0),
+            bottomRight: Radius.circular(40.0),
+            topLeft: Radius.circular(40.0),
+            bottomLeft: Radius.circular(40.0)),
+      ),
+      child: Text(
+        '${score.toStringAsFixed(1)}',
+        style: getStyle(),
+      ),
     );
   }
 }

@@ -9,7 +9,12 @@ import 'package:verum_flutter/providers/user_provider.dart';
 import 'package:verum_flutter/resources/firestore_methods.dart';
 import 'package:verum_flutter/utils/colors.dart';
 import 'package:verum_flutter/utils/global_variables.dart';
+import 'package:verum_flutter/models/user.dart' as model;
 import 'package:verum_flutter/utils/utils.dart';
+import 'dart:async';
+import 'package:intl/intl.dart';
+
+import '../resources/auth_methods.dart';
 
 class AddPostScreen extends StatefulWidget {
   const AddPostScreen({Key? key}) : super(key: key);
@@ -22,6 +27,45 @@ class _AddPostScreenState extends State<AddPostScreen> {
   final TextEditingController _captionController = TextEditingController();
   Uint8List? _image;
   bool _isUploading = false;
+
+  model.User userData = placeholderUser;
+
+  bool _canPost = false;
+
+  late Timer timer;
+  @override
+  void initState() {
+    getData();
+    timer = Timer.periodic(
+        Duration(seconds: 1), (Timer t) => _updatePostRestrictionStatus());
+    super.initState();
+  }
+
+  getData() async {
+    final String? uid = FirebaseAuth.instance.currentUser!.uid;
+    AuthMethods().getUserDetails(uid: uid).then((value) {
+      setState(() {
+        userData = value;
+      });
+    });
+  }
+
+  void _updatePostRestrictionStatus() {
+    final DateTime now = DateTime.now();
+
+    final DateTime userPostTime = userData.postTime;
+    if (userPostTime != null) {
+      setState(() {
+        _canPost = now.compareTo(userPostTime) >= 0 &&
+            now.subtract(const Duration(minutes: 15)).compareTo(userPostTime) <=
+                0;
+      });
+    }
+  }
+
+  String _formatDateTime(DateTime dateTime) {
+    return DateFormat('dd MMM yyyy HH:mm').format(dateTime);
+  }
 
   _selectImage(BuildContext context) async {
     return showDialog(
@@ -90,19 +134,35 @@ class _AddPostScreenState extends State<AddPostScreen> {
 
   @override
   void dispose() {
-    super.dispose();
     _captionController.dispose();
+    timer.cancel();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    final userModel.User user = Provider.of<UserProvider>(context).getUser;
-
     return _image == null
-        ? Center(
-            child: IconButton(
-              icon: const Icon(Icons.upload),
-              onPressed: () => _selectImage(context),
+        ? Scaffold(
+            appBar: AppBar(
+              backgroundColor: mobileBackgroundColor,
+              title: const Text('Create Post'),
+              centerTitle: false,
+            ),
+            body: Center(
+              child: Column(
+                children: [
+                  Text(_canPost
+                      ? "CAN POST UNITL"
+                      : "NO POSTING \nLAST ALLOWED POST TIME:"),
+                  Text(_formatDateTime(userData.postTime
+                      .add(Duration(minutes: _canPost ? 15 : 0)))),
+                  IconButton(
+                    icon: Icon(Icons.upload,
+                        color: _canPost ? Colors.white : Colors.grey),
+                    onPressed: _canPost ? () => _selectImage(context) : () {},
+                  ),
+                ],
+              ),
             ),
           )
         : Scaffold(
@@ -135,7 +195,7 @@ class _AddPostScreenState extends State<AddPostScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     CircleAvatar(
-                      backgroundImage: NetworkImage(user.avatarURL),
+                      backgroundImage: NetworkImage(userData.avatarURL),
                     ),
                     SizedBox(
                       width: MediaQuery.of(context).size.width * 0.45,

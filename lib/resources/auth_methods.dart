@@ -45,7 +45,9 @@ class AuthMethods {
             username: username,
             email: email,
             avatarURL: userAvatarDownloadURL,
-            bio: bio);
+            bio: bio,
+            postTime: DateTime.now(),
+            numPostOpportunities: 0);
 
         await _firestore
             .collection("users")
