@@ -32,7 +32,7 @@ class Post {
       creationDate: (data['creationDate'] as Timestamp).toDate(),
       mediaURL: data['mediaURL'],
       postId: snapshot.id,
-      likes: List.castFrom(data['likes'] as List),
+      likes: data['likes'] == null ? [] : List.castFrom(data['likes'] as List),
     );
   }
 
@@ -44,7 +44,7 @@ class Post {
       creationDate: (data['creationDate'] as Timestamp).toDate(),
       mediaURL: data['mediaURL'],
       postId: snapshot.id,
-      likes: List.castFrom(data['likes'] as List),
+      likes: data['likes'] == null ? [] : List.castFrom(data['likes'] as List),
     );
   }
 }
