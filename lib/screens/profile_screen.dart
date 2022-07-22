@@ -46,6 +46,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
     setState(() {
       uid = widget.uid ?? FirebaseAuth.instance.currentUser!.uid;
     });
+    userPostsSnapshot = FirebaseFirestore.instance
+        .collection('posts')
+        .doc(uid)
+        .collection('userPosts')
+        .get();
     getData();
   }
 
@@ -61,22 +66,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
         setState(() {
           userData = value;
 
-          // get post lENGTH
-          userPostsSnapshot = FirebaseFirestore.instance
-              .collection('posts')
-              .doc(uid)
-              .collection('userPosts')
-              .get();
-
-          userPostsSnapshot.then((value) => setState(() {
-                postLen = value.docs.length;
-                userScore = min(
-                        1,
-                        postLen /
-                            ((userData?.numPostOpportunities ?? 1) *
-                                userScoreMultiplier)) *
-                    100;
-              }));
+          // get num posts
+          userPostsSnapshot.then((value) {
+            setState(() {
+              postLen = value.docs.length;
+              userScore = min(
+                      1,
+                      postLen /
+                          ((userData?.numPostOpportunities ?? 1) *
+                              userScoreMultiplier)) *
+                  100;
+            });
+          });
 
           numFollowers = followers.length;
           numFollowing = following.length;
@@ -99,8 +100,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
-    print('widget: ${widget.uid}');
-    print(FirebaseAuth.instance.currentUser?.uid);
+    // print('widget: ${widget.uid}');
+    // print(FirebaseAuth.instance.currentUser?.uid);
     return isLoading
         ? const Center(
             child: CircularProgressIndicator(),
