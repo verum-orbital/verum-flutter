@@ -1,4 +1,4 @@
-# Verum (Milestone 2)
+# Verum (Milestone 3)
 
 ## Team ID: 5302
 ## Proposed Level of Achievement: Apollo
@@ -124,8 +124,33 @@ We intend to use Flutter and Firebase to develop Verum.
 
 <img src="https://raw.github.com/verum-orbital/verum-flutter/master/README_assets/FeedScreen.png" width="200">
 
-- Users are able to view posts from followed users. 
-- Note: The likes and comments system is currently not implemented in the app. Placeholders were used instead.
+- Users are able to view posts from followed users.
+
+
+### Likes System
+
+<img src="https://raw.github.com/verum-orbital/verum-flutter/master/README_assets/LikePost.png" width="200">
+
+- Users are able to like posts from other users via the heart icon or a double tap gesture! 
+
+### Post Timing Restriction
+
+<img src="https://raw.github.com/verum-orbital/verum-flutter/master/README_assets/CanPost.png" width="200">
+
+<img src="https://raw.github.com/verum-orbital/verum-flutter/master/README_assets/NoPosting.png" width="200">
+
+- Now, users can only post when the server allows them to. When users navigate to the post screen at a restricted time, the post button will not allow them to proceed. At selected points in the day, They will be notified by the server that their post restriction has been lifted, at which point the post button will work. 
+- We accomplished this using firebase cloud functions as well as firebase cloud scheduler. For testing purposes, the function currently lifts post restrictions for all users when called, with the function scheduled to run every hour. 
+- If this app were to proceed into production, we would like a random subset of users to be called, and for the function to run less frequently, and at more appropriate times. 
+
+### User Scoring System
+
+<img src="https://raw.github.com/verum-orbital/verum-flutter/master/README_assets/UserScoreLow.png" width="200">
+
+<img src="https://raw.github.com/verum-orbital/verum-flutter/master/README_assets/UserScoreHigh.png" width="200>
+
+- Users now have an associated score that can be seen in their profile page. This represents how well they have followed the spirit of the app. Our current algorithm calculates this score based on the ratio between the number of posts created by the user, and the number of posting opportunities they have had. 
+- Different colours are used to display a user's score for quick visual indication of whether it is a high or low score.
 
 
 ### User Testing
