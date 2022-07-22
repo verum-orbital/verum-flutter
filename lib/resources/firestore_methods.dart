@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:uuid/uuid.dart';
 import 'package:verum_flutter/models/user.dart' as userModel;
 import 'package:verum_flutter/models/post.dart' as model;
 import 'package:verum_flutter/resources/storage_methods.dart';
@@ -14,18 +15,23 @@ class FirestoreMethods {
     try {
       String mediaURL =
           await StorageMethods().uploadImage('userPosts', image, true);
+      String postId = const Uuid().v1();
 
       model.Post post = model.Post(
-          uid: _auth.currentUser!.uid,
-          caption: caption,
-          creationDate: DateTime.now(),
-          mediaURL: mediaURL);
+        uid: _auth.currentUser!.uid,
+        caption: caption,
+        creationDate: DateTime.now(),
+        mediaURL: mediaURL,
+        postId: postId,
+        likes: [],
+      );
 
       await _firestore
           .collection("posts")
           .doc(_auth.currentUser!.uid)
           .collection("userPosts")
-          .add(post.toJson());
+          .doc(postId)
+          .set(post.toJson());
 
       return "success";
     } catch (err) {
@@ -118,5 +124,34 @@ class FirestoreMethods {
         .collection("users")
         .get()
         .then((value) => value.docs.map((e) => e.id));
+  }
+
+  Future<void> likePost(
+      String postId, String uid, List likes, String username) async {
+    try {
+      if (likes.contains(username)) {
+        print('Like present');
+        await _firestore
+            .collection("posts")
+            .doc(uid)
+            .collection("userPosts")
+            .doc(postId)
+            .update({
+          'likes': FieldValue.arrayRemove([username]),
+        });
+      } else {
+        print('Just liked the picture');
+        await _firestore
+            .collection("posts")
+            .doc(uid)
+            .collection("userPosts")
+            .doc(postId)
+            .update({
+          'likes': FieldValue.arrayUnion([username]),
+        });
+      }
+    } catch (e) {
+      print(e.toString());
+    }
   }
 }

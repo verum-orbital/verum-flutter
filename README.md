@@ -1,4 +1,4 @@
-# Verum (Milestone 1)
+# Verum (Milestone 2)
 
 ## Team ID: 5302
 ## Proposed Level of Achievement: Apollo
@@ -27,12 +27,10 @@ These alerts will be sent out minimally twice a day so users have two chances to
 
 ## User Stories
 
-Whenever an alert is received, users are given fifteen minutes to capture a video or picture.
-Minimally two alerts will be given per day, so that in the slightest chance when users do not have their phone on them during the first alert, they will still be able to post something when the second alert is received. 
-At the end of the day, the user can choose to post one photo or video from all the memories that they have captured from the day.
-Users will be able to find other friends and family on the application and look at their profile.
-Users will be able to get a snapshot of their favourite celebrity and role models lives. 
-
+- As a user, I can receive notifications from the people I care about so that I can stay updated in their lives.
+- As a user, I can view posts from my role models and be confident of the fact that the post was made in a spontaneous and organic manner.
+- As a creator, I can make posts that are more authentic on Social Media so that I do not feel pressured to hide my true feelings and emotions.
+- As an influencer or model, I can upload pictures that show my audience that I am not perfect and I also have my own flaws in my body.
 
 
 ## Proposed Features and Timeline
@@ -41,22 +39,22 @@ Users will be able to get a snapshot of their favourite celebrity and role model
 
 We intend to use Flutter and Firebase to develop Verum.
 
-#### Features to be completed by the mid of June: 
+#### Features to be completed by the end of June: 
 
 - User Authentication ✅  
 - User Profile ✅
 - Upload posts ✅
 - View post history ✅
-- Post timing restrictions (KIV)
-- Push notifications
+- Push notifications ✅
 - Relationship system (e.g. Follow & Unfollow, Friend & Unfriend, etc) ✅
 - View other users’ posts ✅
 
 
-#### Features to be completed by the mid of July: 
+#### Features to be completed by the end of July: 
+- Post timing restrictions 
 - Gamification/Points system 
-- Incentivise users to post regularly & abide by timing constraints
-- Allow users to earn “reputation/credibility” that shows how unfiltered their posts are (to what extent they abide by the spirit of the platform) 
+ - Incentivise users to post regularly & abide by timing constraints
+ - Allow users to earn “reputation/credibility” that shows how unfiltered their posts are (to what extent they abide by the spirit of the platform) 
 - Privacy Settings (private or public account)
 - Likes System
 - Comment system
@@ -72,6 +70,9 @@ We intend to use Flutter and Firebase to develop Verum.
 
 <img width="1012" alt="Firestore DB Schema" src="https://raw.github.com/verum-orbital/verum-flutter/master/README_assets/FirestoreDBSchema.png">
 
+- In Milestone 2, a design decision was made to reorganise the followers/following data as above. This made it easier and more computationally efficient to retrieve the list of user IDs that the current user is following or is being followed by. The previous schema was such that to find a user's followers, every user ID in the database had to be retrieved.
+- The trade-off here is that the follow/unfollow logic must ensure that the appropriate collection for both users' involved are updated. This slightly increases the chance of bugs if we are not careful. The previous schema meant that only one document had to be updated per follow request.
+- For reference, the previous schema can be found at [this commit](https://github.com/verum-orbital/verum-flutter/commit/8a69cd92e0245ea5bcc3d90324504154046db20b)
 
 ### Login Screen
 
@@ -87,9 +88,30 @@ We intend to use Flutter and Firebase to develop Verum.
 - Users are able to register with an email and password
 - This is done via Firebase Authentication
 
-### Sign-out Button in Profile Screen
+### Reusable Profile Screen
 
-<img src="https://raw.github.com/verum-orbital/verum-flutter/master/README_assets/SignOutButton.png" width="200">
+<img src="https://raw.github.com/verum-orbital/verum-flutter/master/README_assets/ProfileSelf.png" width="200">
+
+- Users are able to view their post history in the Profile tab
+- This screen is made reusable for UI consistency when viewing other Verum users via the Search functionality (see below)
+
+### Search Screen
+
+<img src="https://raw.github.com/verum-orbital/verum-flutter/master/README_assets/SearchScreenInactive.png" width="200">
+
+- When the search textfield is inactive, the Search screen currently displays all the posts from the database. In future iterations, this may change to only show posts from accounts that are set to **public**.
+
+<img src="https://raw.github.com/verum-orbital/verum-flutter/master/README_assets/SearchScreenActive.png" width="200">
+
+- Users are able to search for other users via their usernames
+
+<img src="https://raw.github.com/verum-orbital/verum-flutter/master/README_assets/ProfileFollow.png" width="200">
+
+- Tapping on the list item will bring them to the corresponding Profile screen.
+
+<img src="https://raw.github.com/verum-orbital/verum-flutter/master/README_assets/ProfileUnfollow.png" width="200">
+
+- The follow and unfollow button is dynamically shown depending on the current follow status of that user.
 
 ### Add Post Screen
 
@@ -105,11 +127,20 @@ We intend to use Flutter and Firebase to develop Verum.
 
 <img src="https://raw.github.com/verum-orbital/verum-flutter/master/README_assets/FeedScreen.png" width="200">
 
-- Users are able to view posts from followed users.  
-- Note: The follow/unfollow system is currently not implemented in the app. This was achieved by manually adding documents to the Firestore Database.
+- Users are able to view posts from followed users. 
 - Note: The likes and comments system is currently not implemented in the app. Placeholders were used instead.
 
-### App Bundle Distribution
 
-If you have an android device, you may test our app yourself by installing the apk file [here](https://drive.google.com/file/d/1k8aEa3_fC8D00PhxEAMB7NmOn59QZNE5/view?usp=sharing)
+### User Testing
+
+- To run Verum on your own system, you must have the [Flutter SDK](https://docs.flutter.dev/get-started/install) installed on your system. 
+  - Once installed, you can run `flutter doctor` to determine any other missing requirements for your relevant platform. 
+  - Once your environment has been set up, launch a simulator or connect an Android/iOS device. 
+  - Clone the repo via git with the URL: https://github.com/verum-orbital/verum-flutter.git
+  - Run the following command from the root directory to build and deploy the demo to your device: 
+ ```
+ flutter run
+ ```
+
+- If you have an android device, you may test our app directly by installing the apk file [here](https://drive.google.com/file/d/1kAs3BcBlSxf79rElcdDr1YBiy2Udrbgv/view?usp=sharing)
 
